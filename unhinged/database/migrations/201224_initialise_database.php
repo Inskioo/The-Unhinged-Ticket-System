@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
 return new class extends Migration {
-    // abstracted table variables for easier control
     protected $roles = ['admin', 'user', 'support'];
     protected $statuses = ['open', 'resolved'];
     protected $priorities = ['p1', 'p2', 'p3', 'p4', 'p5'];
@@ -20,7 +19,8 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('role', $this->roles)->default('user');
-            $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrentOnUpdate();
         });
 
         // the unhinged table
@@ -33,9 +33,8 @@ return new class extends Migration {
             $table->enum('status', $this->statuses)->default('open');
             $table->enum('priority', $this->priorities)->default('p5');
             $table->enum('type', $this->types)->default('slightly_unhinged');
-            $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->dateTime('resolved_at')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('resolved_at')->nullable();
         });
     }
-
 };

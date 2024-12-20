@@ -2,43 +2,67 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
+    protected $model = User::class;
+    
+    // known users -  this as part of a testing application and would have infrastructure for these users if a deployed system.
+    private $staticHoomans = [
+        'admin' => [
+            'name' => 'James',
+            'email' => 'james@securescreeningservices.com',
+            'password' => 'supersecurepassw0rd',
+        ],
+        'support' => [
+            ['name' => 'Sir Digby Chicken-Ceasar', 'email' => 'dcc@securescreeningservices.com'],
+            ['name' => 'Derek Zoolander', 'email' => 'derek.zoolander@securescreeningservices.com'],
+            ['name' => 'Bruce Wain', 'email' => 'bruce.wain@securescreeningservices.com'],
+        ]
+    ];
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
-    {
+    // automate our unhinged creation
+    public function definition(){
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'name' => $this->faker->name,
+            'email' => $this->faker->unique()->safeEmail,
+            'role' => 'user',
+            'password' => Hash::make('password'),
+            'created_at' => now(),
+            'updated_at' => now()
         ];
     }
 
-    /**
-     * Indicate that the model's email address should be unverified.
-     */
-    public function unverified(): static
-    {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
-        ]);
+    // create our admin user
+    public function admin(){
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => $this->staticHoomans['admin']['name'],
+                'email' => $this->staticHoomans['admin']['email'],
+                'password' => Hash::make($this->staticHoomans['admin']['password']),
+                'role' => 'admin',
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+        });
+    }
+
+    // create our support team
+    public function support(){
+        return $this->state(function (array $attributes) {
+            $supportUser = $this->faker->randomElement($this->staticHoomans['support']);
+            return [
+                'name' => $supportUser['name'],
+                'email' => $supportUser['email'],
+                'role' => 'support',
+                'password' => 'password',
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+        });
     }
 }
