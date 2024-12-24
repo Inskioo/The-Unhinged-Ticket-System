@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ticket extends Model{
-    use hasFactory;
+    use HasFactory;
+
+    public $timestamps = false;
 
     protected $fillable = [
         'user_id',
@@ -38,7 +40,10 @@ class Ticket extends Model{
         return $query->where('type', $type);
     }
 
-    public function scopebySupportAssigned($query, $assignedTo){
+    public function scopebySupportAssigned($query, $assignedTo = null){
+        if ($assignedTo === null) {
+            return $query->whereNotNull('assigned_to');
+        }
         return $query->where('assigned_to', $assignedTo);
     }
 

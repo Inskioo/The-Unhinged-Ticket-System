@@ -10,7 +10,7 @@ class GenerateTicket extends Command{
     protected $description = 'A customer has a problem not quite of this world. Log it with a unhinged ticket';
 
     public function handle(){
-        $ticket = ticketFactory()->create();
+        $ticket = Ticket::factory()->create();
         $this->info('I\'m sorry, we have logged ticket : ' . $ticket->id);
     }
 }
