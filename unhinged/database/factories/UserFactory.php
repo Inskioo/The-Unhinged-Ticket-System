@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-class UserFactory extends Factory
-{
+class UserFactory extends Factory{
     protected $model = User::class;
     
     // known users -  this as part of a testing application and would have infrastructure for these users if a deployed system.

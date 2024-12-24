@@ -9,16 +9,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class TicketFactory extends Factory{
     protected $model = Ticket::class;
 
-    protected $seedfile = 'seeders/data/tickets.json';
-    protected $seed;
-
-    public function __construct($seed = null){
-        $this->seed = json_decode(file_get_contents($seedfile), true);
-    }
+    protected $seedfile = 'database/seeders/TicketData.json';
 
     public function definition(){
-        $ticketToUse = collect($this->seed['tickets'])->random();
-        $unhingedHuman = user::inRandomOrder()->first();
+        $seed = json_decode(file_get_contents($this->seedfile), true);
+        $ticketToUse = collect($seed['tickets'])->random();
+        $unhingedHuman = User::inRandomOrder()->first();
 
         return [
             'user_id' => $unhingedHuman->id,
@@ -32,5 +28,4 @@ class TicketFactory extends Factory{
             'resolved_at' => null,
         ];
     }
-
 }
