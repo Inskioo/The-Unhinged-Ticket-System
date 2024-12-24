@@ -1,19 +1,20 @@
-<?php
+<?php 
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+Route::middleware('auth:sanctum')->group(function(){
+    // all tickets in the system
+    Route::get('/tickets', [TicketController::class, 'index']);
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+    // get data for a specific ticket
+    Route::get('/tickets/{ticket}', [TicketController::class, 'display']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    // getting data on tickets by something
+    Route::get('/tickets/assigned/{support_id?}', [TicketController::class, 'assigned']);
+    Route::get('/tickets/resolved', [TicketController::class, 'resolved']);
+    Route::get('/tickets/category/{type}', [TicketController::class, 'categorise']);
+    Route::get('/tickets/priority/{level}', [TicketController::class, 'priority']);
+    Route::get('/tickets/user/{user_id}', [TicketController::class, 'user']);
+
+    // Auth routes
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
