@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory{
     protected $model = User::class;
     
-    // known users -  this as part of a testing application and would have infrastructure for these users if a deployed system.
+    // known users - this as part of a testing application and would have infrastructure for these users if a deployed system.
     private $staticHoomans = [
         'admin' => [
             'name' => 'James',
