@@ -9,7 +9,7 @@ return new class extends Migration {
     protected $roles = ['admin', 'user', 'support'];
     protected $statuses = ['open', 'resolved'];
     protected $priorities = ['p1', 'p2', 'p3', 'p4', 'p5'];
-    protected $types = ['slightly_unhinged', 'wildly_unhinged', 'completely_unhinged'];
+    protected $types = ['slightly_unhinged', 'wildly_unhinged',];
 
     public function up() {
         // user table

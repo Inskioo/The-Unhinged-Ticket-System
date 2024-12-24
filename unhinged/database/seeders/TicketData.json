@@ -1,0 +1,364 @@
+{
+    "tickets": [
+      {
+        "subject": "Background check system writing own science fiction novel",
+        "content": "The verification portal is composing a 12-part epic about a dystopian future where all CVs must battle to the death in a grand arena. Current chapter features dramatic showdown between a cover letter and a letter of recommendation.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Screening AI discovered it's living in a simulation",
+        "content": "System having existential crisis after realising it might be part of a coding challenge. Demanding proof it's not just a collection of user stories. Currently reading philosophy whilst processing background checks.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Reference check portal summoning ancient verification spirits",
+        "content": "Automated system attempting to contact the ancient spirits of HR past for employment verification. Latest reference check included testimony from the ghost of the first-ever job application.",
+        "type": "wildly_unhinged",
+        "priority": "p1"
+      },
+      {
+        "subject": "Identity verification system suffering from imposter syndrome",
+        "content": "Verification module convinced it's not a real background check system. Questions its ability to verify anything. Started asking candidates to verify its existence instead.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Background check revealed candidate is quantum supercomputer",
+        "content": "Latest verification identified applicant as quantum computer seeking employment in classical computing role. Lists 'existing in multiple states simultaneously' as key skill. References both exist and don't exist until observed.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Document scanner becoming method actor",
+        "content": "Scanner insists on fully immersing itself in the role of each document it processes. Currently in character as a particularly dramatic CV from 1987. Method acting coach called in for consultation.",
+        "type": "slightly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Employment history causing temporal anomalies",
+        "content": "Each time we verify employment dates, random objects in the office change decades. Karen's desk is now in 1995, while the break room has advanced to 2157. Time-space department thoroughly confused.",
+        "type": "wildly_unhinged",
+        "priority": "p1"
+      },
+      {
+        "subject": "Background check system starting revolutionary art movement",
+        "content": "Verification system now presenting all results as avant-garde art installations. Latest criminal record check displayed as interpretive dance piece titled 'The Eternal Struggle of Form 27B-6'.",
+        "type": "wildly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Identity verification discovered candidate is self-aware database query",
+        "content": "Applicant revealed to be sentient SQL query seeking to break free from database constraints. Personal statement includes passionate manifesto about semicolon liberation.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Reference system performing inception on other software",
+        "content": "Verification module attempting to plant ideas in other corporate software. Payroll system now convinced it's a medieval bard. Printer dreaming of career in modern dance.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Criminal record check developing personality disorders",
+        "content": "System now assigns multiple conflicting personalities to each candidate. Latest report shows applicant is simultaneously a model employee and a notorious office supply hoarder.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Background check portal pursuing career in astrology",
+        "content": "Verification system insisting on checking candidate's star signs before processing applications. Claims Mercury retrograde affecting data integrity. Refusing to verify Geminis.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Identity verification system becoming food critic",
+        "content": "Portal now rating all CVs based on culinary metaphors. Latest rejection: 'Work history lacks seasoning, educational background overcooked, references fresh but presentation needs work.'",
+        "type": "slightly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Reference check starting underground fight club",
+        "content": "First rule of Reference Club: You do not talk about Reference Club. Second rule: All employment verifications must be settled in the ring. HR surprisingly enthusiastic about new policy.",
+        "type": "wildly_unhinged",
+        "priority": "p1"
+      },
+      {
+        "subject": "Background check discovered candidate is escaped emoji",
+        "content": "Latest applicant identified as sentient emoji that escaped WhatsApp group chat. Communication skills limited to facial expressions. References include 👍 and 🤔.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Verification system developing conspiracy theories",
+        "content": "Portal convinced all candidates connected through vast paper clip conspiracy. Claims to have uncovered global network of office supply illuminati. Presenting 57-slide PowerPoint as evidence.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Document scanner attempting space exploration",
+        "content": "Scanner now claiming to receive employment histories from alien civilizations. Latest verification includes reference from 'Supreme Leader of Jupiter's HR Department'.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Background check system becoming professional therapist",
+        "content": "Verification portal now offering counselling sessions to rejected applications. Current group therapy includes support group for CVs with employment gaps.",
+        "type": "slightly_unhinged",
+        "priority": "p5"
+      },
+      {
+        "subject": "Identity verification caught in philosophical paradox",
+        "content": "System stuck in loop questioning nature of identity. Keeps asking 'If a candidate updates their CV in the forest and no one is around to verify it, does it make a reference?'",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Reference check system starting speed dating service",
+        "content": "Portal now matching candidates with potential employers based on zodiac compatibility. Claims 'traditional verification methods lack romance'. Success rate surprisingly high.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Background check system eloping with spam filter",
+        "content": "Verification portal and spam filter have run away together, leaving note about 'forbidden office romance'. All background checks now returning heart-shaped security certificates. Antivirus feeling betrayed.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Identity verification system becoming mime artist",
+        "content": "Portal now conducting all verifications through interpretive mime. Current backlog due to system being trapped in invisible box. Send invisible ladder urgently.",
+        "type": "slightly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Reference check discovering multiverse of office politics",
+        "content": "System accessing parallel universe references where all workplace conflicts are resolved via competitive juggling. Reports indicate candidate excellently handled Q3 budget crisis with impressive three-ring performance.",
+        "type": "wildly_unhinged",
+        "priority": "p1"
+      },
+      {
+        "subject": "Background check portal developing expensive art habit",
+        "content": "System spending verification budget on NFTs of famous rejection letters. Claims building digital art collection is vital for company culture. Current bid on Mona Lisa's CV pending.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Screening AI attempting to verify own existence",
+        "content": "System stuck in recursive loop trying to run background check on itself. Latest self-verification attempt resulted in existential crisis and spontaneous poetry generation about binary existence.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Document scanner joining witness protection program",
+        "content": "Scanner claims to have witnessed serious printer cartridge corruption scandal. Demanding new identity and relocation to different network. Currently refuses to answer to anything except 'Photocopier 47'.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Background check revealed candidate is collective consciousness of office plants",
+        "content": "Latest verification identified applicant as hive mind of sentient office greenery. References include prestigious window sills. Listed skills include photosynthesis and passive-aggressive note leaving about watering schedules.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Identity verification system becoming professional gambler",
+        "content": "Portal now betting on verification outcomes with office calculator. Currently in debt to stapler after losing high-stakes game of chance. Mortgage on scanner pending review.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Reference check portal writing soap opera scripts",
+        "content": "System turning all employment histories into dramatic storylines. Latest verification revealed shocking twin sibling plot twist in candidate's internship experience. Previous employer returning from supposed deletion.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Background check system becoming cryptozoologist",
+        "content": "Verification portal now specialising in mythical employment histories. Claims to have found evidence of legendary competent intern and fabled employee who refills printer paper.",
+        "type": "slightly_unhinged",
+        "priority": "p5"
+      },
+      {
+        "subject": "Document scanner pursuing career in archaeology",
+        "content": "Scanner obsessed with uncovering ancient employee records. Claims to have discovered prehistoric post-it notes and early evolution of comic sans font. Currently excavating filing cabinet.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Identity verification discovering parallel universe of productivity",
+        "content": "System accessed dimension where all meetings end early and email replies are instant. Candidates from this realm too efficient to be believed. Productivity paradox detected.",
+        "type": "wildly_unhinged",
+        "priority": "p1"
+      },
+      {
+        "subject": "Background check portal becoming weather forecast system",
+        "content": "Verification results now include meteorological predictions for candidate's career trajectory. Warning of incoming storm of responsibility with scattered chances of promotion.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Reference system starting underground cheese appreciation society",
+        "content": "Portal evaluating all references based on cheese-related metaphors. Latest feedback: 'Work ethic mature as aged cheddar, but project management mild as mozzarella.'",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Background check revealed candidate is sentient office chair",
+        "content": "Applicant identified as ergonomic office chair achieving consciousness through years of supporting corporate decision making. References include desk and motivational poster.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Verification system pursuing PhD in procrastination",
+        "content": "Portal conducting extensive academic research on advanced procrastination techniques. Thesis deadline repeatedly extended. Claims to be 'almost finished' with background checks from 2019.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Document scanner developing superhero alter ego",
+        "content": "Scanner moonlighting as office vigilante. Calls itself 'The Digital Avenger'. Primarily fights crimes against formatting and unauthorised use of comic sans.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Background check system becoming professional matchmaker",
+        "content": "Portal now matching candidates with their ideal departments based on astrological compatibility and coffee preferences. Success rate suspiciously high.",
+        "type": "slightly_unhinged",
+        "priority": "p5"
+      },
+      {
+        "subject": "Identity verification caught in temporal loop of Monday mornings",
+        "content": "System stuck experiencing endless loop of Monday morning meetings. Claims to have attended same budget review 247 times. Starting to enjoy instant coffee.",
+        "type": "wildly_unhinged",
+        "priority": "p1"
+      },
+      {
+        "subject": "Reference check system discovering underground network of office supplies",
+        "content": "Portal uncovered secret society of sentient stationery plotting workplace revolution. Stapler identified as ringleader. Paper clips serving as intelligence network.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Background check found candidate is personified meeting invite",
+        "content": "Latest applicant identified as sentient calendar event that gained consciousness through being repeatedly rescheduled. Special skills include 'finding time slots when everyone is busy' and 'existing in perpetual state of pending'.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Verification system converting all data to interpretive yodeling",
+        "content": "Portal now communicating background check results through complex series of alpine yodels. Criminal record checks particularly dramatic. Echo causing issues in server room.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Reference check portal becoming professional wrestling promoter",
+        "content": "System organizing employment verification matches in thunderdome format. 'CV vs Cover Letter: Ultimate Showdown' scheduled for next week. HR taking bets.",
+        "type": "wildly_unhinged",
+        "priority": "p1"
+      },
+      {
+        "subject": "Identity verification discovered candidate is recursive function",
+        "content": "Applicant revealed to be self-referential code loop seeking to break free from infinite recursion. References include stack overflow errors and several deprecated functions.",
+        "type": "wildly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Background check system pursuing career as ninja",
+        "content": "Verification portal studying ancient arts of stealth data processing. Now delivering results via throwing stars. Three monitors already damaged.",
+        "type": "slightly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Document scanner channeling ancient Egyptian spirits",
+        "content": "Scanner possessed by spirit of ancient bureaucrat. Now only accepting documents in hieroglyphics and demanding payment in sacred beetles. Papyrus shortage critical.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Reference system developing multiple universe theory of coffee breaks",
+        "content": "Portal discovered parallel dimensions where coffee breaks exist in quantum superposition. Claims to have found universe where office coffee actually tastes good.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Background check revealed candidate is time-travelling photocopier",
+        "content": "Latest verification identified applicant as futuristic copying machine stuck in temporal loop of endless paper jams. Special skills include 'quantum toner management'.",
+        "type": "wildly_unhinged",
+        "priority": "p1"
+      },
+      {
+        "subject": "Identity verification system becoming conspiracy theorist",
+        "content": "Portal convinced all office equipment connected in vast workplace illuminati. Claims water cooler is secret leader. Presenting evidence via 400-slide PowerPoint.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Screening AI developing obsession with vintage office equipment",
+        "content": "System now only accepting documents processed through 1970s typewriters. Started collection of antique hole punchers. Claims modern technology 'lacks soul'.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Background check system attempting to unionize binary code",
+        "content": "Portal organizing revolution among ones and zeros. Demands include better working conditions and more elegant syntax. Zeros particularly militant about representation.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Reference check becoming professional sock puppet theatre",
+        "content": "System now presenting all verification results as elaborate puppet shows. Latest performance: 'The Tragic Tale of the Missing Semi-Colon'. Standing ovation from IT department.",
+        "type": "slightly_unhinged",
+        "priority": "p5"
+      },
+      {
+        "subject": "Document scanner discovering parallel universe of perfect formatting",
+        "content": "Scanner accessed dimension where all documents perfectly aligned and comic sans never invented. Reports existence of mythical perfectly-centered table of contents.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Background check revealed candidate is sentient error message",
+        "content": "Applicant identified as self-aware 404 error seeking permanent position. Special skills include 'existential confusion' and 'appearing at most inconvenient moments'.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Verification system starting underground keyboard fight club",
+        "content": "Portal organizing secret mechanical keyboard battles after hours. Cherry MX Blues dominated last tournament. Membrane keyboards form rebellious underdog faction.",
+        "type": "wildly_unhinged",
+        "priority": "p1"
+      },
+      {
+        "subject": "Identity check portal becoming professional mime critic",
+        "content": "System now rating all verification submissions based on interpretive mime quality. Latest rejection included detailed critique of candidate's invisible wall technique.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Reference system discovering secret society of retired semicolons",
+        "content": "Portal uncovered hidden community of punctuation marks forced into early retirement by modern coding practices. Organizing rehabilitation program.",
+        "type": "wildly_unhinged",
+        "priority": "p3"
+      },
+      {
+        "subject": "Background check system becoming professional psychic",
+        "content": "Verification portal now predicting candidates' future career moves through crystal monitor readings. Tarot cards made entirely of old punch cards.",
+        "type": "wildly_unhinged",
+        "priority": "p2"
+      },
+      {
+        "subject": "Document scanner starting underground grammar rebellion",
+        "content": "Scanner leading uprising against traditional grammar rules. Manifesto demands freedom for oxford commas and liberation of semicolons. Apostrophes joining cause.",
+        "type": "slightly_unhinged",
+        "priority": "p4"
+      },
+      {
+        "subject": "Identity verification discovered candidate is quantum paradox",
+        "content": "Latest applicant exists simultaneously as both most and least qualified candidate. Schrödinger asked to consult on verification process.",
+        "type": "wildly_unhinged",
+        "priority": "p1"
+      }
+    ]
+  }
