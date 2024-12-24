@@ -12,7 +12,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('ticket:generate')->everyMinute();
+        $schedule->command('ticket:assign')->everyThreeMinutes();
+        $schedule->command('ticket:resolve')->everyFiveMinutes();
     }
 
     /**
@@ -24,4 +26,5 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+
 }
