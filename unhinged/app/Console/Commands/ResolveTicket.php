@@ -11,7 +11,7 @@ class ResolveTicket extends Command{
 
     public function handle(){
         // I will set the the oldest ticket that is assigned.
-        $ticket = Ticket::bySupportAssigned()->byNotResolved()->orderBy('created_at', 'asc')->first();
+        $ticket = Ticket::bySupportAssigned(true)->byNotResolved()->orderBy('created_at', 'asc')->first();
 
         if ( $ticket ) {
             $ticket->update([

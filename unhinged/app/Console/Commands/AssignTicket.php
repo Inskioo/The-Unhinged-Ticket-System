@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Command;
 
 use App\Models\Ticket;
 use Illuminate\Console\Command;
@@ -14,11 +14,11 @@ class AssignTicket extends Command{
         // logically, I'm going to selet the oldest ticket that is open and unassigned, just so there is some sort of
         // orderly flow to this unorderly mess.
 
-        $ticket = Ticket::whereNull('assigned_to')->byNotResolved()->orderBy('created_at', 'asc')->first();
+        $ticket = Ticket::bySupportAssigned(null)->byNotResolved()->orderBy('created_at', 'asc')->first();
 
         if ( $ticket ){
             $supportVictim = User::where('role', 'support')->inRandomOrder()->first();
-
+            
             $ticket->update(['assigned_to' => $supportVictim->id]);
 
             $this->info('Ticket ' . $ticket->id . ' has been assigned to ' . $supportVictim->name);
