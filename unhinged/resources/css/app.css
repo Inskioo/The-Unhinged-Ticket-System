@@ -92,4 +92,66 @@ body .container .wrapper {
   justify-self: center;
   text-align: center;
   display: Block;
+}
+
+.dashboard {
+  height: 80vh;
+  position: relative;
+  display: flex;
+  flex-gap: 10px;
+  justify-content: center;
+}
+.dashboard .mainPanel {
+  align-self: flex-start;
+  position: relative;
+  width: 45%;
+  height: 100%;
+}
+.dashboard .mainPanel .Navigation {
+  width: 100%;
+  margin: 0 0 20px 0;
+}
+.dashboard .mainPanel .Navigation .signOut {
+  color: white;
+  font-weight: 100;
+  text-decoration: underline;
+  font-size: 20px;
+  margin: 0;
+}
+.dashboard .mainPanel .Navigation h1 {
+  margin: 10px 0 10px 0;
+  font-size: 45px;
+  line-height: 40px;
+  color: white;
+}
+.dashboard .mainPanel .Navigation p {
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+}
+.dashboard .mainPanel .actionBar {
+  display: flex;
+  gap: 5px;
+  margin: 0 0 20px 0;
+}
+.dashboard .mainPanel .actionBar button {
+  font-size: 14px;
+  font-family: "Montserrat";
+  font-weight: 600;
+  padding: 5px 10px 5px 10px;
+  border-radius: 0;
+  border: none;
+  color: white;
+  background-color: transparent;
+  border: solid white 2px;
+  transition: 0.3s ease-in-out;
+}
+.dashboard .mainPanel .actionBar button:hover {
+  background-color: white;
+  color: #EA5B0C;
+}
+.dashboard .mainPanel .actionBar button.active {
+  background-color: #EA5B0C !important;
+  color: white !important;
+  border: none !important;
 }/*# sourceMappingURL=app.css.map */

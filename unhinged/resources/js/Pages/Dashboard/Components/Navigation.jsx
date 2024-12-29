@@ -22,7 +22,7 @@ const Navigation = () => {
     const firstName = user ? user.name.split(' ')[0] : 'Admin';
 
     const handleSignOut = () => {
-        localStorage.removeItem('adminToken');
+        document.cookie = 'adminToken =; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         window.location.href = '/login';
     };
 

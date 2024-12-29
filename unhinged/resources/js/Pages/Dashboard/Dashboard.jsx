@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 // Parent Components
 import Navigation from './Components/Navigation';
-//import ActionBar from './Components/ActionBar';
+import ActionBar from './Components/ActionBar';
 
 // Listing Related Components
 //import TicketList from '/Components/Queue/List';
@@ -18,17 +18,20 @@ import Navigation from './Components/Navigation';
 //import StatsItem from '/Components/Stats/Item';
 
 const Dashboard = () => {
-    const [currentView, setCurrentView] = React.useState('Tickets');
+    const [currentView, setCurrentView] = React.useState('tickets');
 
     const handleViewChange = (view) => {
         setCurrentView(view);
-        setSelectedTicket(null);
     };
 
     return (
         <div className="dashboard">
             <div className="mainPanel">
                 <Navigation />
+                <ActionBar 
+                    currentView={currentView}
+                    handleViewChange={handleViewChange}
+                    />
             </div>
         </div>
     );
