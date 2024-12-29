@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 // Variable Setting
 /// Colours
 $primary : #15293C;
@@ -9,11 +11,11 @@ $font-size : 1rem;
 $font-weight : 400;
 $line-height : 1.5;
 
-$h1Size : 2.5rem;
-$h2Size : 2rem;
-$h3Size : 1.75rem;
-$h4Size : 1.5rem;
-$h5Size : 1.25rem;
+$h1Size : 35px;
+$h2Size : 25px;
+$h3Size : 18px;
+
+$p : 16px;
 
 // Things
 body {
@@ -31,7 +33,78 @@ body {
         .wrapper{
             width:100%;
             max-width:1000px;
-            border: solid white 1px;
+        }
+    }
+}
+
+.login{
+    display:flex;
+    flex-direction:column;
+    align-content:center;
+    position:relative;
+    .logo{
+        position:relative;
+        display:flex;
+        width:100%;
+        justify-content:center;
+        margin: 0 0 10px 0;
+        img{
+            width:400px;
+        }
+    }
+    .title, .subtitle, .bottom{
+        text-align:center;
+        h1{
+            font-size:$h1Size;
+            color:white;
+            margin:50px 0 0 0 ;
+        }
+        h2{
+            font-size:$h2Size;
+            margin:5px 0 50px 0;
+            color:white;
+            font-weight:100;
+            font-style:italic;
+        }
+        p{
+            color:white;
+        }
+    }
+    .loginForm{
+        text-align:center;
+        input{
+            width:100% !important;
+            margin-bottom:10px !important;
+            font-family:$font !important;
+            text-align:center!important;
+            max-width:500px !important;
+            margin:5px!important;
+            text-align:center!important;
+            padding:10px !important;
+            border-bottom:solid $secondary 3px !important;
+            background-color:white !important;
+            color:$secondary !important;
+            font-weight:700 !important;
+            ::placeholder{
+                color:$secondary !important;
+                font-weight:700!important;
+            }
+            :focus{
+                color:$secondary;
+            }
+        }
+        button{
+            width:auto;
+            background-color:$secondary;
+            color:white;
+            font-family:$font;
+            font-weight:600;
+            border:none;
+            padding:10px;
+            font-size:$h3Size;
+            justify-self:center;
+            text-align:center;
+            display:Block;
         }
     }
 }

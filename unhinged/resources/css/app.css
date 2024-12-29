@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 body {
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
@@ -15,5 +16,80 @@ body .container {
 body .container .wrapper {
   width: 100%;
   max-width: 1000px;
-  border: solid white 1px;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  position: relative;
+}
+.login .logo {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 0 0 10px 0;
+}
+.login .logo img {
+  width: 400px;
+}
+.login .title, .login .subtitle, .login .bottom {
+  text-align: center;
+}
+.login .title h1, .login .subtitle h1, .login .bottom h1 {
+  font-size: 35px;
+  color: white;
+  margin: 50px 0 0 0;
+}
+.login .title h2, .login .subtitle h2, .login .bottom h2 {
+  font-size: 25px;
+  margin: 5px 0 50px 0;
+  color: white;
+  font-weight: 100;
+  font-style: italic;
+}
+.login .title p, .login .subtitle p, .login .bottom p {
+  color: white;
+}
+.login .loginForm {
+  text-align: center;
+}
+.login .loginForm input {
+  width: 100% !important;
+  margin-bottom: 10px !important;
+  font-family: "Montserrat", sans-serif !important;
+  text-align: center !important;
+  max-width: 500px !important;
+  margin: 5px !important;
+  text-align: center !important;
+  padding: 10px !important;
+  border-bottom: solid #EA5B0C 3px !important;
+  background-color: white !important;
+  color: #EA5B0C !important;
+  font-weight: 700 !important;
+}
+.login .loginForm input ::-moz-placeholder {
+  color: #EA5B0C !important;
+  font-weight: 700 !important;
+}
+.login .loginForm input ::placeholder {
+  color: #EA5B0C !important;
+  font-weight: 700 !important;
+}
+.login .loginForm input :focus {
+  color: #EA5B0C;
+}
+.login .loginForm button {
+  width: auto;
+  background-color: #EA5B0C;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  border: none;
+  padding: 10px;
+  font-size: 18px;
+  justify-self: center;
+  text-align: center;
+  display: Block;
 }/*# sourceMappingURL=app.css.map */

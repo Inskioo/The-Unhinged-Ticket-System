@@ -16,11 +16,11 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (formData.email === '' && formData.password === 'password') {
+        if (formData.email === 'james@securescreeningservices.co.uk' && formData.password === 'password') {
             localStorage.setItem('adminToken', 'adminToken');
             navigate('/');
         } else {
-            // Todo - Add Error Handling
+            alert('Something went wrong - like your credentials ;)');
         }
     }
 
