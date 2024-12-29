@@ -1,8 +1,9 @@
 <?php 
 
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\UserController;
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::middleware('check.admin.token')->group(function(){
     // all tickets in the system
     Route::get('/tickets', [TicketController::class, 'index']);
 
@@ -16,7 +17,8 @@ Route::middleware('auth:sanctum')->group(function(){
     // get data for a specific ticket
     Route::get('/tickets/{ticket}', [TicketController::class, 'display']);
 
-    // Auth routes
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/logout', [AuthController::class, 'logout']);
+    // user routes
+    Route::get('/users/admin', [UserController::class, 'getAdminName']);
+    Route::get('/users/support', [UserController::class, 'getSupportUserAll']);
+    Route::get('/users/support/{id}', [UserController::class, 'getSupportUserById']);
 });

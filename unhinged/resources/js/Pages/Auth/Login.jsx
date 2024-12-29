@@ -17,7 +17,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (formData.email === 'james@securescreeningservices.co.uk' && formData.password === 'password') {
-            localStorage.setItem('adminToken', 'adminToken');
+            document.cookie = "adminToken=TotallySecureEncryptedTokem; path=/;";
             navigate('/');
         } else {
             alert('Something went wrong - like your credentials ;)');
