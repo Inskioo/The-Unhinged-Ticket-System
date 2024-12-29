@@ -1,8 +1,16 @@
+import './bootstrap';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './components/App';
 import '../css/app.css';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes';
 
-const container = document.getElementById('app');
-const root = createRoot(container);
-root.render(<App />);
+const App = () => {
+    return (
+        <BrowserRouter>
+            <AppRoutes />
+        </BrowserRouter>
+    );
+};
+
+createRoot(document.getElementById('app')).render(<App />);

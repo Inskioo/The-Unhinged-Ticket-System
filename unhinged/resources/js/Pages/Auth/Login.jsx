@@ -1,97 +1,64 @@
-import { useEffect } from 'react';
-import Checkbox from '@/Components/Checkbox';
-import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, Link, useForm } from '@inertiajs/react';
+import React, { useState } from 'react'
+import logo from '../../../assets/logo.svg';
+import { useNavigate } from 'react-router-dom';
 
-export default function Login({ status, canResetPassword }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+const Login = () => {
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
         email: '',
-        password: '',
-        remember: false,
+        password: ''
     });
 
-    useEffect(() => {
-        return () => {
-            reset('password');
-        };
-    }, []);
-
-    const submit = (e) => {
-        e.preventDefault();
-
-        post(route('login'));
+    const handleChange = (e) => { 
+        const { name, value } = e.target; setFormData({ ...formData, [name]: value });
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (formData.email === '' && formData.password === 'password') {
+            localStorage.setItem('adminToken', 'adminToken');
+            navigate('/');
+        } else {
+            // Todo - Add Error Handling
+        }
+    }
+
+    const content = {
+        logo: logo,
+        title: 'Unhinged Client Support System',
+        subtitle: 'Protecting our primary support channels so you dont have to',
+        bottom: '<p>If you have forgotten your password, please contact a member of the admin team.<br><br>If you\'re not a member of the team, ask yourself, <b>why are you here?</b></p>'
+    };
+
+    
     return (
-        <GuestLayout>
-            <Head title="Log in" />
-
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
-
-            <form onSubmit={submit}>
-                <div>
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="username"
-                        isFocused={true}
-                        onChange={(e) => setData('email', e.target.value)}
-                    />
-
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
-                        onChange={(e) => setData('password', e.target.value)}
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="block mt-4">
-                    <label className="flex items-center">
-                        <Checkbox
-                            name="remember"
-                            checked={data.remember}
-                            onChange={(e) => setData('remember', e.target.checked)}
-                        />
-                        <span className="ms-2 text-sm text-gray-600">Remember me</span>
-                    </label>
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Forgot your password?
-                        </Link>
-                    )}
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
-                    </PrimaryButton>
-                </div>
+        <div className="login">
+            <div className="logo"><img src={content.logo} alt="Logo" /></div>
+            <div className="title"><h1>{content.title}</h1></div>
+            <div className="subtitle"><h2>{content.subtitle}</h2></div>
+            <form className="loginForm" onSubmit={handleSubmit}>
+                <input 
+                    className="email"
+                    type="email" 
+                    placeholder="Admin Email" 
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                />
+                <input 
+                    className="password"
+                    type="password" 
+                    placeholder="Password" 
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                />
+                <button type="submit">Sign In</button>
             </form>
-        </GuestLayout>
+            <div className="bottom" dangerouslySetInnerHTML={{ __html: content.bottom }}/>
+        </div>
     );
 }
+
+export default Login;

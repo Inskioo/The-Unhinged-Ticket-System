@@ -1,0 +1,37 @@
+// Variable Setting
+/// Colours
+$primary : #15293C;
+$secondary : #EA5B0C;
+
+/// Type Setting
+$font : 'Montserrat', sans-serif;
+$font-size : 1rem;
+$font-weight : 400;
+$line-height : 1.5;
+
+$h1Size : 2.5rem;
+$h2Size : 2rem;
+$h3Size : 1.75rem;
+$h4Size : 1.5rem;
+$h5Size : 1.25rem;
+
+// Things
+body {
+    font-family: $font;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    background-color:$primary;
+    .container{
+        width:100vw;
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        .wrapper{
+            width:100%;
+            max-width:1000px;
+            border: solid white 1px;
+        }
+    }
+}

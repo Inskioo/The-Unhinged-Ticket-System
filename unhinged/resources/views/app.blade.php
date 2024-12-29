@@ -8,6 +8,10 @@
     @vite('resources/js/app.jsx')
 </head>
 <body>
-    <div id="app"></div>
+    <div class="container">
+        <div class="wrapper">
+            <div id="app"></div>
+        </div>
+    </div>
 </body>
 </html>
