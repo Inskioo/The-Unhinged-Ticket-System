@@ -10,7 +10,7 @@ import ActionBar from './Components/ActionBar';
 //import TicketItem from '/Components/Queue/Item';
 
 // Filters
-//import FilterPanel from '/Components/Filters/Panel';
+import FilterPanel from './Components/Filters/Panel';
 //import FilterItem from '/Components/Filters/Item';
 
 // Stats Pane
@@ -24,6 +24,22 @@ const Dashboard = () => {
         setCurrentView(view);
     };
 
+    const [filters, setFilters] = useState({
+        assignment: null,
+        status: null,
+        type: null,
+        priority: null,
+        supportAgent: null,
+        customerSearch: null,
+    });
+
+    const handleFilterChange = (filterType, value) => {
+        setFilters(prev => ({
+            ...prev,  
+            [filterType]: value  
+        }));
+    };
+
     return (
         <div className="dashboard">
             <div className="mainPanel">
@@ -31,7 +47,13 @@ const Dashboard = () => {
                 <ActionBar 
                     currentView={currentView}
                     handleViewChange={handleViewChange}
+                />
+                <div className="panel">
+                    <FilterPanel 
+                        filters={filters}
+                        onFilterChange={handleFilterChange}
                     />
+                </div>
             </div>
         </div>
     );

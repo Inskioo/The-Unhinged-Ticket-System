@@ -15,7 +15,7 @@ body .container {
 }
 body .container .wrapper {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1600px;
 }
 
 .login {
@@ -154,4 +154,96 @@ body .container .wrapper {
   background-color: #EA5B0C !important;
   color: white !important;
   border: none !important;
+}
+.dashboard .mainPanel .panel {
+  position: relative;
+  width: 100%;
+  height: auto;
+  transition: 0.3s ease-in-out;
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+}
+.dashboard .mainPanel .panel .filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.dashboard .mainPanel .panel .filters h2 {
+  font-size: 20px;
+  color: #EA5B0C;
+  margin: 0 0 5px 0;
+  width: 100%;
+}
+.dashboard .mainPanel .panel .filters .section {
+  width: auto;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: auto;
+  position: relative;
+}
+.dashboard .mainPanel .panel .filters .section h3 {
+  align-self: center;
+  font-size: 16px;
+  color: #EA5B0C;
+  font-weight: 600;
+}
+.dashboard .mainPanel .panel .filters .section span {
+  font-family: "Montserrat", sans-serif;
+  align-self: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #15293C;
+  opacity: 0.6;
+  transition: 0.3s ease-in-out;
+}
+.dashboard .mainPanel .panel .filters .section span:hover {
+  opacity: 0.8;
+}
+.dashboard .mainPanel .panel .filters .section span:hover.active {
+  opacity: 1 !important;
+  color: #EA5B0C !important;
+}
+.dashboard .mainPanel .panel .filters .section input {
+  font-family: "Montserrat", sans-serif !important;
+  text-align: center !important;
+  margin: 5px !important;
+  padding: 10px !important;
+  border-bottom: solid #EA5B0C 3px !important;
+  background-color: white !important;
+  color: #EA5B0C !important;
+  font-weight: 700 !important;
+}
+.dashboard .mainPanel .panel .filters .section input ::-moz-placeholder {
+  color: #EA5B0C !important;
+  font-weight: 700 !important;
+}
+.dashboard .mainPanel .panel .filters .section input ::placeholder {
+  color: #EA5B0C !important;
+  font-weight: 700 !important;
+}
+.dashboard .mainPanel .panel .filters .section input :focus {
+  color: #EA5B0C;
+}
+.dashboard .mainPanel .panel .filters .section select {
+  font-family: "Montserrat", sans-serif !important;
+  text-align: center !important;
+  margin: 5px !important;
+  padding: 10px !important;
+  border-bottom: solid #EA5B0C 3px !important;
+  background-color: white !important;
+  color: #EA5B0C !important;
+  font-weight: 700 !important;
+}
+.dashboard .mainPanel .panel .filters .section select ::-moz-placeholder {
+  color: #EA5B0C !important;
+  font-weight: 700 !important;
+}
+.dashboard .mainPanel .panel .filters .section select ::placeholder {
+  color: #EA5B0C !important;
+  font-weight: 700 !important;
+}
+.dashboard .mainPanel .panel .filters .section select :focus {
+  color: #EA5B0C;
 }/*# sourceMappingURL=app.css.map */
