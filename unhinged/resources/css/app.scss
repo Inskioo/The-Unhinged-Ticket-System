@@ -113,12 +113,12 @@ body {
     height:80vh;
     position:relative;
     display:flex;
-    flex-gap:10px;
+    gap:20px;
     justify-content:center;
     .mainPanel{
         align-self:flex-start;
         position:relative;
-        width:45%;
+        width:40%;
         height:100%;
         // Navigation
         .Navigation{
@@ -171,7 +171,6 @@ body {
         }
         .panel{
             position:relative;
-            width:100%;
             height:auto;
             transition:.3s ease-in-out;
             background-color:white;
@@ -276,5 +275,114 @@ body {
                 }
             }
         }
+    }
+    .masterList{
+        align-self:flex-start;
+        width:100%;
+        position:relative;
+        height:100%;
+        .list{
+            width:100%;
+            positon:relative;
+            .top{
+                display:flex;
+                flex-wrap:wrap;
+                align-content:center;
+                margin: 0 0 10px 0;
+                h2{
+                    font-size:25px;
+                    font-weight:700;
+                    color:White;
+                }
+                h3{
+                    color:white;
+                    font-weight:100;
+                    font-style: italic;
+                    margin:0;
+                }
+                .pagination{
+                    text-align:right;
+                    span{
+                        color:White;
+                        font-size:20px;
+                        font-style:italic;
+                    }
+                }
+                .paginatiobuttons{
+                    display:flex;
+                    justify-content:flex-end;
+                    align-content:center;
+                    flex-grow:1;
+                    gap:10px;
+                    span{
+                        color:white;
+                        align-self:center;
+                    }
+                    button{
+                        background-color:$secondary;
+                        color:white;
+                        padding:10px;
+                        font-family:$font;
+                        &:hover{
+                            background-color:$primary;
+                        }
+                        &:disabled{
+                            opacity:0.4;
+                            pointer-events:none;
+                        }
+                    }
+                }
+            }
+            .tickets{
+                position:relative;
+                height:80vh;
+                overflow-y:auto;
+                .single{
+                    padding:20px;
+                    display:Flex;
+                    height:auto;
+                    gap:10px;
+                    margin:20px;
+                    border-radius:10px;
+                    background-color:white;
+                    .content{
+                        width:70%;
+                        align-self:center;
+                        h3{
+                            color:$secondary;
+                            margin:0 0 10px 0;
+                        }
+                        p{
+                            color:$primary;
+                            margin: 0 0 20px 0;
+                        }
+                        span{
+                            font-weight:800;
+                            color:$secondary;
+                        }
+
+                    }
+                    .meta{
+                        text-align:right;
+                        flex-grow:1;
+                        span{
+                            display:Block;
+                            color:$primary;
+                        }
+                        button{
+                            color:white;
+                            background-color:$secondary;
+                            padding:10px;
+                            transition:.3s ease-in-out;
+                            font-famiily:$font;
+                            font-weight:500;
+                            font-size:18px;
+                        }
+                    }
+
+                }
+            }
+        }
+
     }
 }

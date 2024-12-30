@@ -98,13 +98,13 @@ body .container .wrapper {
   height: 80vh;
   position: relative;
   display: flex;
-  flex-gap: 10px;
+  gap: 20px;
   justify-content: center;
 }
 .dashboard .mainPanel {
   align-self: flex-start;
   position: relative;
-  width: 45%;
+  width: 40%;
   height: 100%;
 }
 .dashboard .mainPanel .Navigation {
@@ -157,7 +157,6 @@ body .container .wrapper {
 }
 .dashboard .mainPanel .panel {
   position: relative;
-  width: 100%;
   height: auto;
   transition: 0.3s ease-in-out;
   background-color: white;
@@ -266,4 +265,110 @@ body .container .wrapper {
 }
 .dashboard .mainPanel .stats .statsArray .figure span, .dashboard .mainPanel .stats .agentArray .figure span {
   color: #EA5B0C;
+}
+.dashboard .masterList {
+  align-self: flex-start;
+  width: 100%;
+  position: relative;
+  height: 100%;
+}
+.dashboard .masterList .list {
+  width: 100%;
+  positon: relative;
+}
+.dashboard .masterList .list .top {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  margin: 0 0 10px 0;
+}
+.dashboard .masterList .list .top h2 {
+  font-size: 25px;
+  font-weight: 700;
+  color: White;
+}
+.dashboard .masterList .list .top h3 {
+  color: white;
+  font-weight: 100;
+  font-style: italic;
+  margin: 0;
+}
+.dashboard .masterList .list .top .pagination {
+  text-align: right;
+}
+.dashboard .masterList .list .top .pagination span {
+  color: White;
+  font-size: 20px;
+  font-style: italic;
+}
+.dashboard .masterList .list .top .paginatiobuttons {
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+  flex-grow: 1;
+  gap: 10px;
+}
+.dashboard .masterList .list .top .paginatiobuttons span {
+  color: white;
+  align-self: center;
+}
+.dashboard .masterList .list .top .paginatiobuttons button {
+  background-color: #EA5B0C;
+  color: white;
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+.dashboard .masterList .list .top .paginatiobuttons button:hover {
+  background-color: #15293C;
+}
+.dashboard .masterList .list .top .paginatiobuttons button:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.dashboard .masterList .list .tickets {
+  position: relative;
+  height: 80vh;
+  overflow-y: auto;
+}
+.dashboard .masterList .list .tickets .single {
+  padding: 20px;
+  display: Flex;
+  height: auto;
+  gap: 10px;
+  margin: 20px;
+  border-radius: 10px;
+  background-color: white;
+}
+.dashboard .masterList .list .tickets .single .content {
+  width: 70%;
+  align-self: center;
+}
+.dashboard .masterList .list .tickets .single .content h3 {
+  color: #EA5B0C;
+  margin: 0 0 10px 0;
+}
+.dashboard .masterList .list .tickets .single .content p {
+  color: #15293C;
+  margin: 0 0 20px 0;
+}
+.dashboard .masterList .list .tickets .single .content span {
+  font-weight: 800;
+  color: #EA5B0C;
+}
+.dashboard .masterList .list .tickets .single .meta {
+  text-align: right;
+  flex-grow: 1;
+}
+.dashboard .masterList .list .tickets .single .meta span {
+  display: Block;
+  color: #15293C;
+}
+.dashboard .masterList .list .tickets .single .meta button {
+  color: white;
+  background-color: #EA5B0C;
+  padding: 10px;
+  transition: 0.3s ease-in-out;
+  font-famiily: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
 }/*# sourceMappingURL=app.css.map */

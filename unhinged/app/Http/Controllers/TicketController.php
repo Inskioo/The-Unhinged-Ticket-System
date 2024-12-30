@@ -7,31 +7,33 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller{
+
     public function index(Request $request)
     {
-        $query = Ticket::with(['user', 'assignedTo'])
-            ->when($request->has('status'), function($query) use ($request) {
-                $query->byStatus($request->status);
-            })
-            ->when($request->has('type'), function($query) use ($request) {
+        $query = Ticket::with(['user', 'assignedTo']);
+    
+        if ($request->status === 'resolved') {
+            $query->byResolved();
+        } else {
+            $query->byNotResolved();
+        }
+    
+        $query->when($request->type, function($query) use ($request) {
                 $query->byType($request->type);
             })
-            ->when($request->has('priority'), function($query) use ($request) {
+            ->when($request->priority, function($query) use ($request) {
                 $query->byPriority($request->priority);
             })
-            ->when($request->has('assigned'), function($query) use ($request) {
-                if ($request->assigned === 'true') {
-                    $query->whereNotNull('assigned_to');
-                } else {
-                    $query->whereNull('assigned_to');
-                }
+            ->when($request->assigned_to, function($query) use ($request) {
+                $query->bySupportAssigned($request->assigned_to);
             })
-            ->when($request->has('search'), function($query) use ($request) {
+            ->when($request->search, function($query) use ($request) {
                 $query->whereHas('user', function($q) use ($request) {
-                    $q->where('name', 'like', '%' . $request->search . '%');
+                    $q->where('name', 'like', '%' . $request->search . '%')
+                      ->orWhere('email', 'like', '%' . $request->search . '%');
                 });
             });
-
+    
         return $query->orderBy('created_at', 'desc')->paginate(10);
     }
 

@@ -2,18 +2,23 @@ import React, { useState, useEffect } from 'react';
 
 const TicketList =({ filters, onTicketSelect }) => {
     const [tickets, setTickets] = useState([]);
-    const [currentPage, setCurrentPage] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [viewDescription, setViewDescription] = useState('Currently Showing All Unhinged Tickets');
+    const [viewDescription, setViewDescription] = useState('Currently Showing All');
+
+    useEffect(() => {
+        setCurrentPage(1);
+        fetchTickets();
+    }, [filters]);
 
     useEffect(() => {
         fetchTickets();
-    }, [currentPage, filters]);
+    }, [currentPage]);
 
     const fetchTickets = async () => {
         try{
 
-            let URL = '/api/tickets?page=${currentPage}';
+            let url =  `/api/tickets?page=${currentPage}`;
             if (filters.status) url += `&status=${filters.status}`;
             if (filters.type) url += `&type=${filters.type}`;
             if (filters.priority) url += `&priority=${filters.priority}`;
@@ -27,22 +32,8 @@ const TicketList =({ filters, onTicketSelect }) => {
             const data = await response.json();
 
             setTickets(data.data);
-            setTotalPages('data.last_page');
-            setCurrentPage('data.current_page');
-
-            let desc = 'Viewing Page';
-            if (filters.status) {
-                description += `${filters.status} `;
-            }
-            if (filters.type) {
-                description += `${filters.type} `;
-            }
-            if (filters.priority) {
-                description += `priority ${filters.priority} `;
-            }
-            description += 'tickets';
-
-            setViewDescription(description);
+            setTotalPages(data.last_page);
+            setCurrentPage(data.current_page);
 
         } catch (error) {
             console.error('Unable to grab ticket:', error);
@@ -51,26 +42,41 @@ const TicketList =({ filters, onTicketSelect }) => {
         }
     };
 
+    const getFilterDescription = () => {
+        const hasActiveFilter = Object.values(filters).some(value => value !== null);
+        
+        return hasActiveFilter ? 'Showing Filtered Tickets' : 'Showing All Tickets';
+    };
+    
+    useEffect(() => {
+        setViewDescription(getFilterDescription());
+    }, [filters]);
+
     return (
 
         <div className="list">
 
             <div className="top">
-                <h2>{viewDescription}</h2>
-                <div class="pagination">
-                    <button 
-                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                        disabled={currentPage === 1}
-                    >
-                        Previous
-                    </button>
-                    <span>Page {currentPage} of {totalPages}</span>
-                    <button 
-                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                        disabled={currentPage === totalPages}
-                    >
-                        Next
-                    </button>
+                <div>
+                    <h2>Ticket Queue</h2>
+                    <h3>{viewDescription}</h3>
+                </div>
+                <div className="pagination">
+                    <div className="paginationButtons">
+                        <button 
+                                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                disabled={currentPage === 1}
+                            >
+                                Previous
+                        </button>
+                        <button 
+                                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                disabled={currentPage === totalPages}
+                            >
+                                Next
+                        </button>
+                    </div>
+                    <span> Showing {currentPage} of {totalPages}</span>
                 </div>
             </div>
 
@@ -80,7 +86,7 @@ const TicketList =({ filters, onTicketSelect }) => {
                         <div className="content">
                             <h3>{ticket.subject}</h3>
                             <p>{ticket.content.substring(0,100)}...</p>
-                            <span>{ticket.created_at} - {ticket.user.name}</span>
+                            <span>{ticket.user.id} - {ticket.user.name}</span>
                         </div>
 
                         <div className="meta">
@@ -88,6 +94,7 @@ const TicketList =({ filters, onTicketSelect }) => {
                             <span>{ticket.created_at}</span>
                             <span>{ticket.assigned_to ? 'Assigned' : 'Unassigned'}</span>
                             <span>{ticket.priority}</span>
+                            <span>{ticket.type}</span>
                             <button 
                                     className="actionButton"
                                     onClick={() => onTicketSelect(ticket)}
@@ -103,3 +110,5 @@ const TicketList =({ filters, onTicketSelect }) => {
 
 
 }
+
+export default TicketList;

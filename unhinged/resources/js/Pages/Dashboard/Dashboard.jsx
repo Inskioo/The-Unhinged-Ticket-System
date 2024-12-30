@@ -5,7 +5,7 @@ import Navigation from './Components/Navigation';
 import ActionBar from './Components/ActionBar';
 
 // Listing Related Components
-//import TicketList from '/Components/Queue/List';
+import TicketList from './Components/Queue/List';
 //import TicketDetail from '/Components/Queue/Detail';
 //import TicketItem from '/Components/Queue/Item';
 
@@ -19,6 +19,7 @@ import StatsPanel from './Components/Stats/Panel';
 
 const Dashboard = () => {
     const [currentView, setCurrentView] = React.useState('tickets');
+    const [selectedTicket, setSelectedTicket] = useState(null);
 
     const handleViewChange = (view) => {
         setCurrentView(view);
@@ -38,6 +39,10 @@ const Dashboard = () => {
             ...prev,  
             [filterType]: value  
         }));
+    };
+
+    const handleTicketSelect = (ticket) => {
+        setSelectedTicket(ticket);
     };
 
     const renderPanel = () => {
@@ -62,6 +67,12 @@ const Dashboard = () => {
                 <div className="panel">
                     {renderPanel()}
                 </div>
+            </div>
+            <div className="masterList">
+                <TicketList
+                    filters={filters}
+                    onTicketSelect={handleTicketSelect}
+                    />
             </div>
         </div>
     );

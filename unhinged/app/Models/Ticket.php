@@ -28,6 +28,10 @@ class Ticket extends Model{
         'resolved_at' => 'datetime'
     ];
 
+    protected function serializeDate(\DateTimeInterface $date){
+        return $date->format('d/m/Y H:i');
+    }
+
     public function scopebyPriority($query, $priority){
         return $query->where('priority', $priority);
     }
