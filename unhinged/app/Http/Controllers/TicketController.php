@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller{
@@ -46,4 +47,43 @@ class TicketController extends Controller{
     {
         return Ticket::byUnhingedHuman($user_id)->get();
     }
+
+    public function queueStats(){
+        return response()->json([
+            'inQueue' => Ticket::count(),
+            'unassigned' => Ticket::whereNull('assigned_to')->count(),
+            'assignedIncomplete' => Ticket::bySupportAssigned()->
+                                    byNotResolved()->
+                                    count(),
+            'slightlyUnhinged' => Ticket::byType('slightly_unhinged')->count(),
+            'wildlyUnhinged' => Ticket::byResolved()->count(),
+        ]);
+    }
+
+
+    public function agentStats()
+    {
+        $agents = User::where('role', 'support')->get();
+        
+        $stats = $agents->map(function($agent) {
+            $assignedCount = Ticket::bySupportAssigned($agent->id)->count();
+            $completedCount = Ticket::bySupportAssigned($agent->id)->
+                            byResolved()->
+                            count();
+            
+            return [
+                'id' => $agent->id,
+                'name' => $agent->name,
+                'assignedCount' => $assignedCount,
+                'completedCount' => $completedCount,
+                'completionRate' => $assignedCount > 0 
+                    ? round(($completedCount / $assignedCount) * 100, 1) 
+                    : 0
+            ];
+        });
+
+        return response()->json($stats);
+    }
+
+
 }

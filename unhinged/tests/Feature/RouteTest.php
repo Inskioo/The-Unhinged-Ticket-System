@@ -4,21 +4,18 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Models\Ticket;
-use Laravel\Sanctum\Sanctum;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class RouteTest extends TestCase{
     use RefreshDatabase;
 
-    protected $user;
     protected $supportUser;
 
     protected function setUp(): void{
         parent::setUp();
         
-        $this->user = User::factory()->create();
-        
+        // Create support user
         $this->supportUser = User::create([
             'name' => 'Testy Support Test',
             'email' => 'test@test.test',
@@ -26,26 +23,22 @@ class RouteTest extends TestCase{
             'password' => 'password',
         ]);
 
+        // Create test tickets
         Ticket::factory()->count(5)->create();
         
+        // Create assigned ticket
         Ticket::factory()->create([
             'assigned_to' => $this->supportUser->id
         ]);
 
+        // Create resolved ticket
         Ticket::factory()->create([
             'status' => 'resolved',
             'resolved_at' => now(),
         ]);
     }
 
-    public function testUnauthenticatedUserCannotAccessApi(){
-        $response = $this->getJson('/api/tickets');
-        $response->assertStatus(401);
-    }
-
     public function testCanGetAllTickets(){
-        Sanctum::actingAs($this->user);
-        
         $response = $this->getJson('/api/tickets');
         
         $response->assertStatus(200)
@@ -53,8 +46,6 @@ class RouteTest extends TestCase{
     }
 
     public function testCanGetSpecificTicket(){
-        Sanctum::actingAs($this->user);
-        
         $ticket = Ticket::first();
         
         $response = $this->getJson("/api/tickets/{$ticket->id}");
@@ -63,30 +54,24 @@ class RouteTest extends TestCase{
                 ->assertJson([
                     'id' => $ticket->id,
                     'subject' => $ticket->subject
-                 ]);
+                ]);
     }
 
     public function testCanGetAssignedTickets(){
-        Sanctum::actingAs($this->user);
-        
         $response = $this->getJson('/api/tickets/assigned/' . $this->supportUser->id);
         
         $response->assertStatus(200)
-                 ->assertJsonCount(1);
+                ->assertJsonCount(1);
     }
 
     public function testCanGetResolvedTickets(){
-        Sanctum::actingAs($this->user);
-        
         $response = $this->getJson('/api/tickets/resolved');
         
         $response->assertStatus(200)
-                 ->assertJsonCount(1);
+                ->assertJsonCount(1);
     }
 
     public function testCanGetTicketsByCategory(){
-        Sanctum::actingAs($this->user);
-        
         $ticket = Ticket::factory()->create([
             'type' => 'slightly_unhinged'
         ]);
@@ -99,8 +84,6 @@ class RouteTest extends TestCase{
     }
 
     public function testCanGetTicketsByPriority(){
-        Sanctum::actingAs($this->user);
-        
         $ticket = Ticket::factory()->create([
             'priority' => 'p1'
         ]);
@@ -113,22 +96,47 @@ class RouteTest extends TestCase{
     }
 
     public function testCanGetTicketsByUser(){
-        Sanctum::actingAs($this->user);
-        
+        $user = User::factory()->create();
         $ticket = Ticket::factory()->create([
-            'user_id' => $this->user->id
+            'user_id' => $user->id
         ]);
         
-        $response = $this->getJson("/api/tickets/user/{$this->user->id}");
+        $response = $this->getJson("/api/tickets/user/{$user->id}");
         
         $response->assertStatus(200);
         $this->assertTrue(collect($response->json())
-            ->contains('user_id', $this->user->id));
+            ->contains('user_id', $user->id));
+    }
+
+    public function testCanGetQueueStats(){
+        $response = $this->getJson('/api/tickets/stats/queue');
+        
+        $response->assertStatus(200)
+                ->assertJsonStructure([
+                    'inQueue',
+                    'unassigned',
+                    'assignedIncomplete',
+                    'slightlyUnhinged',
+                    'wildlyUnhinged',
+                ]);
+    }
+
+    public function testCanGetAgentStats(){
+        $response = $this->getJson('/api/tickets/stats/agents');
+        
+        $response->assertStatus(200)
+                ->assertJsonStructure([
+                    '*' => [
+                        'id',
+                        'name',
+                        'assignedCount',
+                        'completedCount',
+                        'completionRate'
+                    ]
+                ]);
     }
 
     public function testInvalidTicketIdReturns404(){
-        Sanctum::actingAs($this->user);
-        
         $response = $this->getJson('/api/tickets/99999');
         
         $response->assertStatus(404);

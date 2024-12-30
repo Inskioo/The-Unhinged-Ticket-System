@@ -14,6 +14,10 @@ Route::middleware('check.admin.token')->group(function(){
     Route::get('/tickets/priority/{level}', [TicketController::class, 'priority']);
     Route::get('/tickets/user/{user_id}', [TicketController::class, 'user']);
 
+    // statsss <3
+    Route::get('/tickets/stats/queue', [TicketController::class, 'queueStats']);
+    Route::get('/tickets/stats/agents', [TicketController::class, 'agentStats']);
+
     // get data for a specific ticket
     Route::get('/tickets/{ticket}', [TicketController::class, 'display']);
 
