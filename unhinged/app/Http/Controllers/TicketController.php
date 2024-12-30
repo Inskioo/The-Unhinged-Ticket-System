@@ -7,9 +7,32 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller{
-    public function index()
+    public function index(Request $request)
     {
-        return Ticket::orderBy('created_at', 'desc')->get();
+        $query = Ticket::with(['user', 'assignedTo'])
+            ->when($request->has('status'), function($query) use ($request) {
+                $query->byStatus($request->status);
+            })
+            ->when($request->has('type'), function($query) use ($request) {
+                $query->byType($request->type);
+            })
+            ->when($request->has('priority'), function($query) use ($request) {
+                $query->byPriority($request->priority);
+            })
+            ->when($request->has('assigned'), function($query) use ($request) {
+                if ($request->assigned === 'true') {
+                    $query->whereNotNull('assigned_to');
+                } else {
+                    $query->whereNull('assigned_to');
+                }
+            })
+            ->when($request->has('search'), function($query) use ($request) {
+                $query->whereHas('user', function($q) use ($request) {
+                    $q->where('name', 'like', '%' . $request->search . '%');
+                });
+            });
+
+        return $query->orderBy('created_at', 'desc')->paginate(10);
     }
 
     public function display(Ticket $ticket)
@@ -19,33 +42,33 @@ class TicketController extends Controller{
 
     public function assigned($support_id = null)
     {
-        $query = Ticket::query();
+        $query = Ticket::with(['user', 'assignedTo']);
         
         if ($support_id) {
-            return $query->bySupportAssigned($support_id)->get();
+            return $query->bySupportAssigned($support_id)->paginate(10);
         }
         
-        return $query->bySupportAssigned(true)->get();
+        return $query->bySupportAssigned(true)->paginate(10);
     }
 
     public function resolved()
     {
-        return Ticket::byResolved()->get();
+        return Ticket::with(['user', 'assignedTo'])->byResolved()->paginate(10);
     }
 
     public function categorise($type)
     {
-        return Ticket::byType($type)->get();
+        return Ticket::with(['user', 'assignedTo'])->byType($type)->paginate(10);
     }
 
     public function priority($level)
     {
-        return Ticket::byPriority($level)->get();
+        return Ticket::with(['user', 'assignedTo'])->byPriority($level)->paginate(10);
     }
 
     public function user($user_id)
     {
-        return Ticket::byUnhingedHuman($user_id)->get();
+        return Ticket::with(['user', 'assignedTo'])->byUnhingedHuman($user_id)->paginate(10);
     }
 
     public function queueStats(){

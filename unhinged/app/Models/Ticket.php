@@ -59,5 +59,13 @@ class Ticket extends Model{
         return $query->whereNull('resolved_at');
     }
 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function assignedTo(){
+        return $this->belongsTo(User::class, 'assigned_to');
+    }
+
 
 }
