@@ -246,4 +246,24 @@ body .container .wrapper {
 }
 .dashboard .mainPanel .panel .filters .section select :focus {
   color: #EA5B0C;
+}
+.dashboard .mainPanel .stats h2 {
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  color: #15293C;
+}
+.dashboard .mainPanel .stats .statsArray, .dashboard .mainPanel .stats .agentArray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 15px 0;
+}
+.dashboard .mainPanel .stats .statsArray .figure, .dashboard .mainPanel .stats .agentArray .figure {
+  font-size: 18px;
+  margin: 0;
+  color: #15293C;
+  font-weight: 700;
+}
+.dashboard .mainPanel .stats .statsArray .figure span, .dashboard .mainPanel .stats .agentArray .figure span {
+  color: #EA5B0C;
 }/*# sourceMappingURL=app.css.map */

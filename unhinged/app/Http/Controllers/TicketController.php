@@ -50,13 +50,20 @@ class TicketController extends Controller{
 
     public function queueStats(){
         return response()->json([
-            'inQueue' => Ticket::count(),
-            'unassigned' => Ticket::whereNull('assigned_to')->count(),
-            'assignedIncomplete' => Ticket::bySupportAssigned()->
-                                    byNotResolved()->
-                                    count(),
-            'slightlyUnhinged' => Ticket::byType('slightly_unhinged')->count(),
-            'wildlyUnhinged' => Ticket::byResolved()->count(),
+            'currentQueue' => [
+                'total' => Ticket::byNotResolved()->count(),
+                'unassigned' => Ticket::whereNull('assigned_to')->byNotResolved()->count(),
+                'assignedIncomplete' => Ticket::whereNotNull('assigned_to')->byNotResolved()->count()
+            ],
+            'typeBreakdown' => [
+                'slightlyUnhinged' => Ticket::byType('slightly_unhinged')->byNotResolved()->count(),
+                'wildlyUnhinged' => Ticket::byType('wildly_unhinged')->byNotResolved()->count()
+            ],
+            'resolvedStats' => [
+                'totalComplete' => Ticket::byResolved()->count(),
+                'slightlyUnhinged' => Ticket::byType('slightly_unhinged')->byResolved()->count(),
+                'wildlyUnhinged' => Ticket::byType('wildly_unhinged')->byResolved()->count()
+            ]
         ]);
     }
 
@@ -64,23 +71,19 @@ class TicketController extends Controller{
     public function agentStats()
     {
         $agents = User::where('role', 'support')->get();
-        
-        $stats = $agents->map(function($agent) {
-            $assignedCount = Ticket::bySupportAssigned($agent->id)->count();
-            $completedCount = Ticket::bySupportAssigned($agent->id)->
-                            byResolved()->
-                            count();
+    
+        return response()->json($agents->map(function($agent) {
+            $assigned = Ticket::bySupportAssigned($agent->id)->count();
+            $completed = Ticket::bySupportAssigned($agent->id)->byResolved()->count();
             
             return [
                 'id' => $agent->id,
                 'name' => $agent->name,
-                'assignedCount' => $assignedCount,
-                'completedCount' => $completedCount,
-                'completionRate' => $assignedCount > 0 
-                    ? round(($completedCount / $assignedCount) * 100, 1) 
-                    : 0
+                'assignedCount' => $assigned,
+                'completedCount' => $completed,
+                'qtr' => $assigned > 0 ? round(($completed / $assigned) * 100) : 0
             ];
-        });
+        }));
 
         return response()->json($stats);
     }

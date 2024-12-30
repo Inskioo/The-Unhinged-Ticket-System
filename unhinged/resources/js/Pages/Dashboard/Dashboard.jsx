@@ -14,7 +14,7 @@ import FilterPanel from './Components/Filters/Panel';
 //import FilterItem from '/Components/Filters/Item';
 
 // Stats Pane
-import StatsPanel from '/Components/Stats/Panel';
+import StatsPanel from './Components/Stats/Panel';
 //import StatsItem from '/Components/Stats/Item';
 
 const Dashboard = () => {
@@ -40,6 +40,17 @@ const Dashboard = () => {
         }));
     };
 
+    const renderPanel = () => {
+        return currentView === 'tickets' ? (
+            <FilterPanel
+                filters={filters}
+                onFilterChange={handleFilterChange}
+                />
+        ) : (
+            <StatsPanel />
+        )
+    }
+
     return (
         <div className="dashboard">
             <div className="mainPanel">
@@ -49,10 +60,7 @@ const Dashboard = () => {
                     handleViewChange={handleViewChange}
                 />
                 <div className="panel">
-                    <FilterPanel 
-                        filters={filters}
-                        onFilterChange={handleFilterChange}
-                    />
+                    {renderPanel()}
                 </div>
             </div>
         </div>
