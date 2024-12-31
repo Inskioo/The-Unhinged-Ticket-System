@@ -98,13 +98,13 @@ body .container .wrapper {
   height: 80vh;
   position: relative;
   display: flex;
-  gap: 20px;
+  gap: 10px;
   justify-content: center;
 }
 .dashboard .mainPanel {
   align-self: flex-start;
   position: relative;
-  width: 40%;
+  width: 45%;
   height: 100%;
 }
 .dashboard .mainPanel .Navigation {
@@ -196,13 +196,14 @@ body .container .wrapper {
   color: #15293C;
   opacity: 0.6;
   transition: 0.3s ease-in-out;
+  cursor: pointer;
 }
 .dashboard .mainPanel .panel .filters .section span:hover {
   opacity: 0.8;
 }
-.dashboard .mainPanel .panel .filters .section span:hover.active {
+.dashboard .mainPanel .panel .filters .section span.active {
   opacity: 1 !important;
-  color: #EA5B0C !important;
+  color: #15293C !important;
 }
 .dashboard .mainPanel .panel .filters .section input {
   font-family: "Montserrat", sans-serif !important;
@@ -268,13 +269,12 @@ body .container .wrapper {
 }
 .dashboard .masterList {
   align-self: flex-start;
-  width: 100%;
   position: relative;
   height: 100%;
 }
 .dashboard .masterList .list {
   width: 100%;
-  positon: relative;
+  position: relative;
 }
 .dashboard .masterList .list .top {
   display: flex;
@@ -295,11 +295,26 @@ body .container .wrapper {
 }
 .dashboard .masterList .list .top .pagination {
   text-align: right;
+  flex-grow: 1;
+  align-self: flex-end;
 }
 .dashboard .masterList .list .top .pagination span {
   color: White;
   font-size: 20px;
   font-style: italic;
+}
+.dashboard .masterList .list .top .pagination button {
+  background-color: #EA5B0C;
+  color: white;
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+.dashboard .masterList .list .top .pagination button:hover {
+  background-color: #15293C;
+}
+.dashboard .masterList .list .top .pagination button:disabled {
+  opacity: 0.4;
+  pointer-events: none;
 }
 .dashboard .masterList .list .top .paginatiobuttons {
   display: flex;
@@ -362,13 +377,113 @@ body .container .wrapper {
 .dashboard .masterList .list .tickets .single .meta span {
   display: Block;
   color: #15293C;
+  font-weight: 700;
 }
 .dashboard .masterList .list .tickets .single .meta button {
   color: white;
   background-color: #EA5B0C;
   padding: 10px;
   transition: 0.3s ease-in-out;
-  font-famiily: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
+  border: none;
+  outline: none;
   font-size: 18px;
+  transition: 0.3s ease-in-out;
+}
+.dashboard .masterList .list .tickets .single .meta button:hover {
+  background-color: #15293C;
+}
+.dashboard .detail {
+  padding: 20px;
+  position: relative;
+}
+.dashboard .detail .meta {
+  width: 100%;
+  display: Flex;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.dashboard .detail .meta span {
+  color: #15293C;
+  font-weight: 700;
+}
+.dashboard .detail .head {
+  width: 100%;
+  position: relative;
+  text-align: left;
+  margin: 0 0 20px 0;
+}
+.dashboard .detail .head h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+.dashboard .detail .head .counts {
+  position: relative;
+  display: flex;
+  gap: 10px;
+}
+.dashboard .detail .head .counts span {
+  font-weight: 700;
+  color: #15293C;
+}
+.dashboard .detail .head .counts span b {
+  color: #EA5B0C;
+}
+.dashboard .detail .content {
+  position: relative;
+  width: 100%;
+}
+.dashboard .detail .content h3 {
+  font-size: 20px;
+  color: #EA5B0C;
+  margin: 0 0 10px 0;
+}
+.dashboard .detail .content p {
+  color: #15293C;
+  font-size: 15px;
+  font-weight: 400;
+}
+.dashboard .detail .assign {
+  margin: 20px 0 20px 0;
+}
+.dashboard .detail .assign select {
+  border: solid #EA5B0C 2px;
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  background-color: white;
+  color: #EA5B0C;
+  height: 40px;
+}
+.dashboard .detail .assign button {
+  color: white;
+  background-color: #15293C;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  padding: 10px;
+}
+.dashboard .detail .actions {
+  display: flex;
+  flex-wrap: Wrap;
+  gap: 10px;
+  position: relative;
+  margin: 10px 0 10px 0;
+}
+.dashboard .detail .actions button {
+  background-color: white;
+  border: #15293C solid 2px;
+  color: #15293C;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+}
+.dashboard .detail .actions button:hover {
+  background-color: #15293C;
+  color: White;
+}
+.dashboard .detail .actions button.active {
+  background-color: #EA5B0C !important;
+  color: white !important;
 }/*# sourceMappingURL=app.css.map */

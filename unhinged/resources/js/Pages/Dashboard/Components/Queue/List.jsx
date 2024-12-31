@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, refreshTrigger } from 'react';
 
 const TicketList =({ filters, onTicketSelect }) => {
-    const [tickets, setTickets] = useState([]);
+    const [tickets, setTickets] = useState(() => {
+        const cachedTickets = localStorage.getItem('cachedTickets');
+        return cachedTickets ? JSON.parse(cachedTickets) : [];
+    });
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [viewDescription, setViewDescription] = useState('Currently Showing All');
@@ -13,7 +16,11 @@ const TicketList =({ filters, onTicketSelect }) => {
 
     useEffect(() => {
         fetchTickets();
-    }, [currentPage]);
+    }, [currentPage, refreshTrigger ]);
+
+    useEffect(() => {
+        fetchTickets();
+    }, [currentPage, filters, refreshTrigger])
 
     const fetchTickets = async () => {
         try{
@@ -32,6 +39,9 @@ const TicketList =({ filters, onTicketSelect }) => {
             const data = await response.json();
 
             setTickets(data.data);
+
+            localStorage.setItem('cachedTickets', JSON.stringify(data.data));
+
             setTotalPages(data.last_page);
             setCurrentPage(data.current_page);
 
@@ -51,6 +61,16 @@ const TicketList =({ filters, onTicketSelect }) => {
     useEffect(() => {
         setViewDescription(getFilterDescription());
     }, [filters]);
+
+    const formatPriority = (priority) => {
+        return priority.toUpperCase();
+    };
+    
+    const formatType = (type) => {
+        return type.split('_')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    };
 
     return (
 
@@ -93,8 +113,8 @@ const TicketList =({ filters, onTicketSelect }) => {
                             <span>Ticket ID - {ticket.id}</span>
                             <span>{ticket.created_at}</span>
                             <span>{ticket.assigned_to ? 'Assigned' : 'Unassigned'}</span>
-                            <span>{ticket.priority}</span>
-                            <span>{ticket.type}</span>
+                            <span>{formatPriority(ticket.priority)}</span>
+                            <span>{formatType(ticket.type)}</span>
                             <button 
                                     className="actionButton"
                                     onClick={() => onTicketSelect(ticket)}

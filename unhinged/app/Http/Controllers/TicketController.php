@@ -113,5 +113,52 @@ class TicketController extends Controller{
         return response()->json($stats);
     }
 
+    public function getUserTicketCounts($userId){
+        return response()->json([
+            'resolved' => Ticket::byResolved()->byUnhingedHuman($userId)->count(),
+            'unresolved' => Ticket::byNotResolved()->byUnhingedHuman($userId)->count()
+        ]);
+    }
+
+    public function assignTicket(Request $request, Ticket $ticket){
+        $validated = $request->validate([
+            'agent_id' => 'required|exists:users,id'
+        ]);
+
+        $ticket->update([
+            'assigned_to' => $validated['agent_id']
+        ]);
+
+        return response()->json([
+            'message' => 'Poor Agent - Success',
+            'ticket' => $ticket->fresh()
+        ]);
+    }
+
+    public function resolveTicket(Ticket $ticket){
+        $ticket->update([
+            'status' => 'resolved',
+        ]);
+
+        return response()->json([
+            'message' => 'Woo - Closed manually',
+            'ticket' => $ticket->fresh()
+        ]);
+    }
+
+    public function setType(Request $request, Ticket $ticket){
+        $validated = $request->validate([
+            'type' => 'required|in:slightly_unhinged,wildly_unhinged'
+        ]);
+
+        $ticket->update([
+            'type' => $validated['type']
+        ]);
+
+        return response()->json([
+            'message' => 'Unhinged Type Set - Woo',
+            'ticket' => $ticket->fresh()
+        ]);
+    }
 
 }

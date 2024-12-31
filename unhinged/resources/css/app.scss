@@ -113,12 +113,12 @@ body {
     height:80vh;
     position:relative;
     display:flex;
-    gap:20px;
+    gap:10px;
     justify-content:center;
     .mainPanel{
         align-self:flex-start;
         position:relative;
-        width:40%;
+        width:45%;
         height:100%;
         // Navigation
         .Navigation{
@@ -207,12 +207,13 @@ body {
                         color:$primary;
                         opacity:0.6;
                         transition: .3s ease-in-out;
+                        cursor:pointer;
                         &:hover{
                          opacity:0.8;
-                        &.active{
-                            opacity:1!important;
-                            color:$secondary!important;
                         }
+                        &.active{
+                            opacity:1 !important;
+                            color:$primary !important;
                         }
                     }
                     input{
@@ -278,12 +279,11 @@ body {
     }
     .masterList{
         align-self:flex-start;
-        width:100%;
         position:relative;
         height:100%;
         .list{
             width:100%;
-            positon:relative;
+            position:relative;
             .top{
                 display:flex;
                 flex-wrap:wrap;
@@ -301,11 +301,25 @@ body {
                     margin:0;
                 }
                 .pagination{
-                    text-align:right;
+                    text-align:right;    flex-grow: 1;
+                    align-self: flex-end;
                     span{
                         color:White;
                         font-size:20px;
                         font-style:italic;
+                    }
+                    button{
+                        background-color:$secondary;
+                        color:white;
+                        padding:10px;
+                        font-family:$font;
+                        &:hover{
+                            background-color:$primary;
+                        }
+                        &:disabled{
+                            opacity:0.4;
+                            pointer-events:none;
+                        }
                     }
                 }
                 .paginatiobuttons{
@@ -368,21 +382,121 @@ body {
                         span{
                             display:Block;
                             color:$primary;
+                            font-weight:700;
                         }
                         button{
                             color:white;
                             background-color:$secondary;
                             padding:10px;
                             transition:.3s ease-in-out;
-                            font-famiily:$font;
+                            font-family:$font;
                             font-weight:500;
+                            border:none;
+                            outline:none;
                             font-size:18px;
+                            transition:.3s ease-in-out;
+                            &:hover{
+                                background-color:$primary;
+                            }
                         }
                     }
 
                 }
             }
         }
-
+    }
+    .detail{
+        padding:20px;
+        position:relative;
+        .meta{
+            width:100%;
+            display:Flex;
+            justify-content:flex-start;
+            gap:10px;
+            flex-wrap:wrap;
+            span{
+                color:$primary;
+                font-weight:700;
+            }
+        }
+        .head{
+            width:100%;
+            position:relative;
+            text-align:left;
+            margin:0 0 20px 0;
+            h2{
+                font-size:20px;
+                font-weight:700;
+                margin:0 0 10px;
+            }
+            .counts{
+                position:relative;
+                display:flex;
+                gap:10px;
+                span{
+                    font-weight:700;
+                    color:$primary;
+                    b{
+                        color:$secondary;
+                    }
+                }
+            }
+        }
+        .content{
+            position:relative;
+            width:100%;
+            h3{
+                font-size:20px;
+                color:$secondary;
+                margin: 0 0 10px 0;
+            }
+            p{
+                color:$primary;
+                font-size:15px;
+                font-weight:400;
+            }
+        }
+        .assign{
+            margin:20px 0 20px 0;
+            select{
+                border:solid $secondary 2px;
+                font-size:15px;
+                font-family:$font;
+                font-weight:700;
+                background-color:white;
+                color:$secondary;
+                height:40px;
+            }
+            button{
+                color:white;
+                background-color:$primary;
+                font-family:$font;
+                font-weight:700;
+                padding:10px;
+            }
+        }
+        .actions{
+            display:flex;
+            flex-wrap:Wrap;
+            gap:10px;
+            position:relative;
+            margin:10px 0 10px 0;
+            button{
+                background-color:white;
+                border:$primary solid 2px;
+                color:$primary;
+                font-weight:700;
+                font-family:$font;
+                &:hover{
+                    background-color:$primary;
+                    color:White;
+                }
+                &.active{
+                    background-color:$secondary!important;
+                    color:white!important;
+                }
+            }
+        }
     }
 }
+

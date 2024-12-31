@@ -1,28 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-// Parent Components
 import Navigation from './Components/Navigation';
 import ActionBar from './Components/ActionBar';
-
-// Listing Related Components
 import TicketList from './Components/Queue/List';
-//import TicketDetail from '/Components/Queue/Detail';
-//import TicketItem from '/Components/Queue/Item';
-
-// Filters
+import TicketDetail from './Components/Queue/Detail';
 import FilterPanel from './Components/Filters/Panel';
-//import FilterItem from '/Components/Filters/Item';
-
-// Stats Pane
 import StatsPanel from './Components/Stats/Panel';
-//import StatsItem from '/Components/Stats/Item';
 
 const Dashboard = () => {
     const [currentView, setCurrentView] = React.useState('tickets');
     const [selectedTicket, setSelectedTicket] = useState(null);
+    const [supportAgents, setSupportAgents] = useState([]);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
 
     const handleViewChange = (view) => {
         setCurrentView(view);
+        setSelectedTicket(null);
     };
 
     const [filters, setFilters] = useState({
@@ -41,20 +34,52 @@ const Dashboard = () => {
         }));
     };
 
+    const handleTicketUpdate = () => {
+        setRefreshTrigger(prev => prev + 1);
+    };
+
     const handleTicketSelect = (ticket) => {
         setSelectedTicket(ticket);
     };
 
     const renderPanel = () => {
-        return currentView === 'tickets' ? (
+
+        if (selectedTicket && currentView === 'tickets') { 
+            return (
+                <TicketDetail 
+                    ticket={selectedTicket}
+                    supportAgents={supportAgents}
+                    onClose={() => setSelectedTicket(null)}
+                    onUpdate={handleTicketUpdate}
+                />
+            );
+        }
+
+        if (currentView === 'stats') {
+            return <StatsPanel />;
+        }
+
+        return (
             <FilterPanel
                 filters={filters}
                 onFilterChange={handleFilterChange}
-                />
-        ) : (
-            <StatsPanel />
-        )
-    }
+            />
+        );
+    };
+
+    useEffect(() => {
+        const fetchAgents = async () => {
+            try {
+                const response = await fetch('/api/users/support');
+                const data = await response.json();
+                setSupportAgents(data);
+            } catch (error) {
+                console.error('Error fetching support agents:', error);
+            }
+        };
+        
+        fetchAgents();
+    }, []);
 
     return (
         <div className="dashboard">
@@ -72,7 +97,8 @@ const Dashboard = () => {
                 <TicketList
                     filters={filters}
                     onTicketSelect={handleTicketSelect}
-                    />
+                    refreshTrigger={refreshTrigger}
+                />
             </div>
         </div>
     );

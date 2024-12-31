@@ -17,6 +17,7 @@ Route::middleware('check.admin.token')->group(function(){
     // statsss <3
     Route::get('/tickets/stats/queue', [TicketController::class, 'queueStats']);
     Route::get('/tickets/stats/agents', [TicketController::class, 'agentStats']);
+    Route::get('/tickets/user/{user}/counts', [TicketController::class, 'getUserTicketCounts']);
 
     // get data for a specific ticket
     Route::get('/tickets/{ticket}', [TicketController::class, 'display']);
@@ -25,4 +26,9 @@ Route::middleware('check.admin.token')->group(function(){
     Route::get('/users/admin', [UserController::class, 'getAdminName']);
     Route::get('/users/support', [UserController::class, 'getSupportUserAll']);
     Route::get('/users/support/{id}', [UserController::class, 'getSupportUserById']);
+
+    // action routes
+    Route::post('/tickets/{ticket}/assign', [TicketController::class, 'assignTicket']);
+    Route::post('/tickets/{ticket}/resolve', [TicketController::class, 'resolveTicket']);
+    Route::post('/tickets/{ticket}/type', [TicketController::class, 'setType']);
 });
