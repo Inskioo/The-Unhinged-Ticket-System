@@ -35,18 +35,14 @@ if ! docker info > /dev/null 2>&1; then
     exit 1
 fi
 
-if [ ! -f .env ]; then
-    obviousEcho "No .env detected! Creating one for you..."
-    cp .env.example .env
-    php artisan key:generate
-    echo -e "${GREEN}✓ .env file created${NC}"
-fi
-
 obviousEcho "Installing initial Laravel requirements"
 composer install
 
 obviousEcho "Setting up Sail"
 composer require laravel/sail --dev
+
+obviousEcho "Running Composer Things."
+./vendor/bin/sail composer install
 
 obviousEcho "Containers, containers, where art thou (booting, they're booting.)"
 ./vendor/bin/sail up -d
@@ -55,25 +51,35 @@ obviousEcho "Giving the whales a moment to get unhinged..."
 echo -e "${YELLOW}Please wait while the containers settle...${NC}"
 progressBar 10
 
+if [ ! -f .env ]; then
+    obviousEcho "No .env detected! Creating one for you..."
+    cp .env.example .env
+    echo -e "${GREEN}✓ .env file created${NC}"
+    php artisan key:generate
+fi
+
 obviousEcho "Checking if MySQL is ready..."
 while ! ./vendor/bin/sail exec mysql mysqladmin ping -h"localhost" -u"sail" -p"password" --silent; do
     echo -e "${YELLOW}Waiting for MySQL to be ready...${NC}"
     sleep 3
 done
 
-obviousEcho "Running Composer Things."
-./vendor/bin/sail composer install
-
 obviousEcho "Setting up the unhinged database. you'll need to give it some time to populate tickets, however,"
 ./vendor/bin/sail artisan migrate:fresh --seed
+
+obviousEcho "Waiting for database to settle..."
+sleep 5
+
+obviousEcho "Testing our ticket functionality:"
+./vendor/bin/sail artisan config:clear
+./vendor/bin/sail artisan test
 
 obviousEcho "Installing packages"
 npm install
 obviousEcho "putting the front end together, nearly there."
 npm run build
 
-obviousEcho "Setting up the ticket scheduler"
-nohup ./vendor/bin/sail artisan schedule:work &
+./vendor/bin/sail artisan schedule:work &
 
-echo -e "\n${GREEN}${BOLD}Build complete! you can now visit http://yeslocalhost:8080${NC}"
+echo -e "\n${GREEN}${BOLD}Build complete! you can now visit http://localhost:8080${NC}"
 echo -e "${YELLOW}${BOLD}or better yet, go to https://unhinged.inski.io for a better experience${NC}\n"

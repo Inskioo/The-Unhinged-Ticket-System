@@ -7,12 +7,14 @@ use App\Models\Ticket;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class RouteTest extends TestCase{
+class RouteTest extends TestCase
+{
     use RefreshDatabase;
 
     protected $supportUser;
 
-    protected function setUp(): void{
+    protected function setUp(): void
+    {
         parent::setUp();
         
         // Create support user
@@ -38,14 +40,21 @@ class RouteTest extends TestCase{
         ]);
     }
 
-    public function testCanGetAllTickets(){
+    public function testCanGetAllTickets()
+    {
         $response = $this->getJson('/api/tickets');
         
         $response->assertStatus(200)
-                ->assertJsonCount(7);
+                ->assertJsonStructure([
+                    'data',
+                    'total'
+                ]);
+        
+        $this->assertEquals(7, $response->json('total'));
     }
 
-    public function testCanGetSpecificTicket(){
+    public function testCanGetSpecificTicket()
+    {
         $ticket = Ticket::first();
         
         $response = $this->getJson("/api/tickets/{$ticket->id}");
@@ -57,21 +66,38 @@ class RouteTest extends TestCase{
                 ]);
     }
 
-    public function testCanGetAssignedTickets(){
+    public function testCanGetAssignedTickets()
+    {
         $response = $this->getJson('/api/tickets/assigned/' . $this->supportUser->id);
         
         $response->assertStatus(200)
-                ->assertJsonCount(1);
+                ->assertJsonStructure([
+                    'data',
+                    'total'
+                ]);
+        
+        $this->assertEquals(1, $response->json('total'));
+        $ticket = $response->json('data.0');
+        $this->assertNotNull($ticket);
+        $this->assertNotNull($ticket['assigned_to']);
     }
 
-    public function testCanGetResolvedTickets(){
+    public function testCanGetResolvedTickets()
+    {
         $response = $this->getJson('/api/tickets/resolved');
         
         $response->assertStatus(200)
-                ->assertJsonCount(1);
+                ->assertJsonStructure([
+                    'data',
+                    'total'
+                ]);
+        
+        $this->assertEquals(1, $response->json('total'));
+        $this->assertEquals('resolved', $response->json('data.0.status'));
     }
 
-    public function testCanGetTicketsByCategory(){
+    public function testCanGetTicketsByCategory()
+    {
         $ticket = Ticket::factory()->create([
             'type' => 'slightly_unhinged'
         ]);
@@ -79,11 +105,12 @@ class RouteTest extends TestCase{
         $response = $this->getJson('/api/tickets/category/slightly_unhinged');
         
         $response->assertStatus(200);
-        $this->assertTrue(collect($response->json())
-            ->contains('type', 'slightly_unhinged'));
+        $tickets = $response->json('data');
+        $this->assertTrue(collect($tickets)->contains('type', 'slightly_unhinged'));
     }
 
-    public function testCanGetTicketsByPriority(){
+    public function testCanGetTicketsByPriority()
+    {
         $ticket = Ticket::factory()->create([
             'priority' => 'p1'
         ]);
@@ -91,11 +118,12 @@ class RouteTest extends TestCase{
         $response = $this->getJson('/api/tickets/priority/p1');
         
         $response->assertStatus(200);
-        $this->assertTrue(collect($response->json())
-            ->contains('priority', 'p1'));
+        $tickets = $response->json('data');
+        $this->assertTrue(collect($tickets)->contains('priority', 'p1'));
     }
 
-    public function testCanGetTicketsByUser(){
+    public function testCanGetTicketsByUser()
+    {
         $user = User::factory()->create();
         $ticket = Ticket::factory()->create([
             'user_id' => $user->id
@@ -104,24 +132,35 @@ class RouteTest extends TestCase{
         $response = $this->getJson("/api/tickets/user/{$user->id}");
         
         $response->assertStatus(200);
-        $this->assertTrue(collect($response->json())
-            ->contains('user_id', $user->id));
+        $tickets = $response->json('data');
+        $this->assertTrue(collect($tickets)->contains('user_id', $user->id));
     }
 
-    public function testCanGetQueueStats(){
+    public function testCanGetQueueStats()
+    {
         $response = $this->getJson('/api/tickets/stats/queue');
         
         $response->assertStatus(200)
                 ->assertJsonStructure([
-                    'inQueue',
-                    'unassigned',
-                    'assignedIncomplete',
-                    'slightlyUnhinged',
-                    'wildlyUnhinged',
+                    'currentQueue' => [
+                        'total',
+                        'unassigned',
+                        'assignedIncomplete'
+                    ],
+                    'typeBreakdown' => [
+                        'slightlyUnhinged',
+                        'wildlyUnhinged'
+                    ],
+                    'resolvedStats' => [
+                        'totalComplete',
+                        'slightlyUnhinged',
+                        'wildlyUnhinged'
+                    ]
                 ]);
     }
 
-    public function testCanGetAgentStats(){
+    public function testCanGetAgentStats()
+    {
         $response = $this->getJson('/api/tickets/stats/agents');
         
         $response->assertStatus(200)
@@ -131,12 +170,13 @@ class RouteTest extends TestCase{
                         'name',
                         'assignedCount',
                         'completedCount',
-                        'completionRate'
+                        'qtr'
                     ]
                 ]);
     }
 
-    public function testInvalidTicketIdReturns404(){
+    public function testInvalidTicketIdReturns404()
+    {
         $response = $this->getJson('/api/tickets/99999');
         
         $response->assertStatus(404);
