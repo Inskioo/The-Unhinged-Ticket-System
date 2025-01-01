@@ -68,10 +68,12 @@ obviousEcho "Setting up the unhinged database. you'll need to give it some time 
 ./vendor/bin/sail artisan migrate:fresh --seed
 
 obviousEcho "Installing packages"
-npm npm install
-
+npm install
 obviousEcho "putting the front end together, nearly there."
-run npm run build
+npm run build
 
-echo -e "\n${GREEN}${BOLD}Build complete! you can now visit http://localhost:8080${NC}"
+obviousEcho "Setting up the ticket scheduler"
+nohup ./vendor/bin/sail artisan schedule:work
+
+echo -e "\n${GREEN}${BOLD}Build complete! you can now visit http://yeslocalhost:8080${NC}"
 echo -e "${YELLOW}${BOLD}or better yet, go to https://unhinged.inski.io for a better experience${NC}\n"
