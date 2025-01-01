@@ -7,7 +7,7 @@ use App\Models\Ticket;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class AgentNotifySummary extends Command {
+class Notify extends Command {
 
     protected $signature = 'tickets:notify-agents';
     protected $description = 'Send summary to all support agents';

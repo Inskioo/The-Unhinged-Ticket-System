@@ -52,13 +52,22 @@ class UserFactory extends Factory{
 
     // create our support team
     public function support(){
-        return $this->state(function (array $attributes) {
-            $supportUser = $this->faker->randomElement($this->staticHoomans['support']);
+        static $supportIndex = 0;
+        
+        return $this->state(function (array $attributes) use (&$supportIndex) {
+            if ($supportIndex >= count($this->staticHoomans['support'])) {
+                throw new \Exception('All support users have been created!');
+            }
+            
+            $supportUser = $this->staticHoomans['support'][$supportIndex];
+            
+            $supportIndex++;
+            
             return [
                 'name' => $supportUser['name'],
                 'email' => $supportUser['email'],
                 'role' => 'support',
-                'password' => 'password',
+                'password' => Hash::make('password'),
                 'created_at' => now(),
                 'updated_at' => now()
             ];
