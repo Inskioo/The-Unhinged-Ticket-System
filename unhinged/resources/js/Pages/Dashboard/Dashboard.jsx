@@ -12,7 +12,7 @@ const Dashboard = () => {
     const [selectedTicket, setSelectedTicket] = useState(null);
     const [supportAgents, setSupportAgents] = useState([]);
     const [refreshTrigger, setRefreshTrigger] = useState(0);
-
+    
     const handleViewChange = (view) => {
         setCurrentView(view);
         setSelectedTicket(null);
@@ -38,35 +38,6 @@ const Dashboard = () => {
         setRefreshTrigger(prev => prev + 1);
     };
 
-    const handleTicketSelect = (ticket) => {
-        setSelectedTicket(ticket);
-    };
-
-    const renderPanel = () => {
-
-        if (selectedTicket && currentView === 'tickets') { 
-            return (
-                <TicketDetail 
-                    ticket={selectedTicket}
-                    supportAgents={supportAgents}
-                    onClose={() => setSelectedTicket(null)}
-                    onUpdate={handleTicketUpdate}
-                />
-            );
-        }
-
-        if (currentView === 'stats') {
-            return <StatsPanel />;
-        }
-
-        return (
-            <FilterPanel
-                filters={filters}
-                onFilterChange={handleFilterChange}
-            />
-        );
-    };
-
     useEffect(() => {
         const fetchAgents = async () => {
             try {
@@ -79,7 +50,43 @@ const Dashboard = () => {
         };
         
         fetchAgents();
+    }, []); 
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setRefreshTrigger(prev => prev + 1);
+        }, 10000);
+    
+        return () => clearInterval(interval);
     }, []);
+
+    const handleTicketSelect = (ticket) => {
+        setSelectedTicket(ticket);
+    };
+
+    const renderPanel = () => {
+        if (selectedTicket) { 
+            return (
+                <TicketDetail 
+                    ticket={selectedTicket}
+                    supportAgents={supportAgents}
+                    onClose={() => setSelectedTicket(null)}
+                    onUpdate={handleTicketUpdate}
+                />
+            );
+        }
+        return currentView === 'stats' ? 
+            <StatsPanel 
+                supportAgents={supportAgents}
+            /> : 
+            <FilterPanel
+                filters={filters}
+                onTicketSelect={handleTicketSelect}
+                refreshTrigger={refreshTrigger}
+                agentsList={supportAgents}
+                onFilterChange={handleFilterChange}
+            />;
+    };
 
     return (
         <div className="dashboard">
@@ -98,6 +105,7 @@ const Dashboard = () => {
                     filters={filters}
                     onTicketSelect={handleTicketSelect}
                     refreshTrigger={refreshTrigger}
+                    supportAgents={supportAgents}
                 />
             </div>
         </div>

@@ -1,13 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-const TicketDetail = ({ ticket, supportAgents, onClose }) => {
+const TicketDetail = ({ ticket, supportAgents, onClose, onUpdate }) => {
     const [isAssigning, setIsAssigning] = useState(false);
     const [selectedAgent, setSelectedAgent] = useState('');
     const [message, setMessage] = useState('');
+    const [currentType, setCurrentType] = useState(ticket.type);
     const [userTicketCounts, setUserTicketCounts] = useState({
         resolved: 0,
         unresolved: 0
     });
+
+    useEffect(() => {
+        setCurrentType(ticket.type);
+    }, [ticket.type]);
 
     const showMessage = (msg) => {
         setMessage(msg);
@@ -56,6 +61,8 @@ const TicketDetail = ({ ticket, supportAgents, onClose }) => {
     };
 
     const handleType = async (type) => {
+        if (type === currentType) return;
+        
         try {
             const response = await fetch(`/api/tickets/${ticket.id}/type`, {
                 method: 'POST',
@@ -69,6 +76,7 @@ const TicketDetail = ({ ticket, supportAgents, onClose }) => {
             if (!response.ok) throw new Error('Type system is unhinged. hng');
             
             const data = await response.json();
+            setCurrentType(type);
             showMessage(data.message);
             onUpdate();
             
@@ -84,7 +92,7 @@ const TicketDetail = ({ ticket, supportAgents, onClose }) => {
                 const data = await response.json();
                 setUserTicketCounts(data);
             } catch (error) {
-                console.error('Error fetching user ticket counts:', error);
+                console.error('what even are numbers:', error);
             }
         };
 
@@ -99,10 +107,10 @@ const TicketDetail = ({ ticket, supportAgents, onClose }) => {
                 <span>{ticket.created_at}</span>
                 <span>Priority: {ticket.priority}</span>
                 <span>
-                {ticket.assigned_to ? 
-                    `Assigned to: ${supportAgents.find(a => a.id === ticket.assigned_to)?.name || 'Unknown'}` : 
-                    'Unassigned'
-                }
+                    {ticket.assigned_to ? 
+                        `Assigned to: ${ticket.assigned_to.name}` : 
+                        'Unassigned'
+                    }
                 </span>
             </div>
             <div className="head">
@@ -143,15 +151,23 @@ const TicketDetail = ({ ticket, supportAgents, onClose }) => {
                         Mark as Resolved
                     </button>
                 )}
-                <button onClick={() => handleType('slightly_unhinged')}>
+                <button 
+                    onClick={() => handleType('slightly_unhinged')}
+                    disabled={currentType === 'slightly_unhinged'}
+                    className={currentType === 'slightly_unhinged' ? 'active' : ''}
+                >
                     Mark as Slightly Unhinged
                 </button>
-                <button onClick={() => handleType('wildly_unhinged')}>
+                <button 
+                    onClick={() => handleType('wildly_unhinged')}
+                    disabled={currentType === 'wildly_unhinged'}
+                    className={currentType === 'wildly_unhinged' ? 'active' : ''}
+                >
                     Mark as Wildly Unhinged
                 </button>
             </div>
         </div>
-    )
+    );
 };
 
 export default TicketDetail;

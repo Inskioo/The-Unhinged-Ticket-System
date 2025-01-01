@@ -1,26 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
-const FilterPanel = ({ filters, onFilterChange }) => {
+const FilterPanel = ({ filters, onFilterChange, agentsList }) => {
     const pees = [
         'p1', 'p2', 'p3', 'p4'
     ];
 
-    const [supportAgents, setSupportAgents] = useState([]);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState(filters.customerSearch || '');
 
-    useEffect(() => {
-        const fetchSupportHoomans = async () => {
-            try {
-                const response = await fetch('/api/users/support');
-                const data = await response.json();
-                setSupportAgents(data);
-            } catch (error) {
-                console.error('Error fetching support hoomans, sad :(', error);
-            }
-        };
-
-        fetchSupportHoomans();
-    }, []);
+    const getActiveClass = (filterType, value) => {
+        return filters[filterType] === value ? 'active' : '';
+    };
 
     return (
         <div className="filters">
@@ -29,14 +18,16 @@ const FilterPanel = ({ filters, onFilterChange }) => {
             <div className="section">
                 <h3>Assignment</h3>
                 <span 
-                    onClick={() => onFilterChange('assignment', filters.assignment === 'unassigned' ? null : 'unassigned')}
-                    className={`${filters.assignment === 'unassigned' ? 'active' : ''}`}
+                    onClick={() => onFilterChange('assignment', 
+                        filters.assignment === 'unassigned' ? null : 'unassigned')}
+                    className={getActiveClass('assignment', 'unassigned')}
                 >
                     Unassigned
                 </span>
                 <span 
-                    onClick={() => onFilterChange('assignment', filters.assignment === 'assigned' ? null : 'assigned')}
-                    className={`${filters.assignment === 'assigned' ? 'active' : ''}`}
+                    onClick={() => onFilterChange('assignment', 
+                        filters.assignment === 'assigned' ? null : 'assigned')}
+                    className={getActiveClass('assignment', 'assigned')}
                 >
                     Assigned
                 </span>
@@ -45,14 +36,16 @@ const FilterPanel = ({ filters, onFilterChange }) => {
             <div className="section">
                 <h3>Status</h3>
                 <span 
-                    onClick={() => onFilterChange('status', filters.status === 'resolved' ? null : 'resolved')}
-                    className={`${filters.status === 'resolved' ? 'active' : ''}`}
+                    onClick={() => onFilterChange('status', 
+                        filters.status === 'resolved' ? null : 'resolved')}
+                    className={getActiveClass('status', 'resolved')}
                 >
                     Resolved
                 </span>
                 <span 
-                    onClick={() => onFilterChange('status', filters.status === 'unresolved' ? null : 'unresolved')}
-                    className={`${filters.status === 'unresolved' ? 'active' : ''}`}
+                    onClick={() => onFilterChange('status', 
+                        filters.status === 'unresolved' ? null : 'unresolved')}
+                    className={getActiveClass('status', 'unresolved')}
                 >
                     Unresolved
                 </span>
@@ -61,14 +54,16 @@ const FilterPanel = ({ filters, onFilterChange }) => {
             <div className="section">
                 <h3>How Unhinged</h3>
                 <span 
-                    onClick={() => onFilterChange('type', filters.type === 'slightly_unhinged' ? null : 'slightly_unhinged')}
-                    className={`${filters.type === 'slightly_unhinged' ? 'active' : ''}`}
+                    onClick={() => onFilterChange('type', 
+                        filters.type === 'slightly_unhinged' ? null : 'slightly_unhinged')}
+                    className={getActiveClass('type', 'slightly_unhinged')}
                 >
                     Slightly Unhinged
                 </span>
                 <span 
-                    onClick={() => onFilterChange('type', filters.type === 'wildly_unhinged' ? null : 'wildly_unhinged')}
-                    className={`${filters.type === 'wildly_unhinged' ? 'active' : ''}`}
+                    onClick={() => onFilterChange('type', 
+                        filters.type === 'wildly_unhinged' ? null : 'wildly_unhinged')}
+                    className={getActiveClass('type', 'wildly_unhinged')}
                 >
                     Wildly Unhinged
                 </span>
@@ -79,10 +74,11 @@ const FilterPanel = ({ filters, onFilterChange }) => {
                 {pees.map((pee) => (
                     <span 
                         key={pee}
-                        onClick={() => onFilterChange('priority', filters.priority === pee ? null : pee)}
-                        className={`${filters.priority === pee ? 'active' : ''}`}
+                        onClick={() => onFilterChange('priority', 
+                            filters.priority === pee ? null : pee)}
+                        className={getActiveClass('priority', pee)}
                     >
-                        {pee}
+                        {pee.toUpperCase()}
                     </span>
                 ))}
             </div>
@@ -94,7 +90,7 @@ const FilterPanel = ({ filters, onFilterChange }) => {
                     onChange={(e) => onFilterChange('supportAgent', e.target.value || null)}
                 >
                     <option value="">Select Support Agent</option>
-                    {supportAgents.map(agent => (
+                    {agentsList?.map(agent => ( 
                         <option key={agent.id} value={agent.id}>
                             {agent.name}
                         </option>
@@ -109,8 +105,9 @@ const FilterPanel = ({ filters, onFilterChange }) => {
                     placeholder="Search by name..."
                     value={searchTerm}
                     onChange={(e) => {
-                        setSearchTerm(e.target.value);
-                        onFilterChange('customerSearch', e.target.value || null);
+                        const value = e.target.value;
+                        setSearchTerm(value);
+                        onFilterChange('customerSearch', value || null);
                     }}
                     className="searchInput"
                 />

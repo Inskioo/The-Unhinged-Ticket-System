@@ -3,7 +3,7 @@
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 
-Route::middleware('check.admin.token')->group(function(){
+Route::middleware('check.admin.token', 'throttle:260,1')->group(function(){
     // all tickets in the system
     Route::get('/tickets', [TicketController::class, 'index']);
 

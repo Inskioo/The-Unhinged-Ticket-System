@@ -33,6 +33,7 @@ body {
         .wrapper{
             width:100%;
             max-width:1600px;
+            margin: 0 20px 0 20
         }
     }
 }
@@ -72,13 +73,14 @@ body {
     }
     .loginForm{
         text-align:center;
+        display: Flex;
+        flex-direction: column;
+        align-items: center;
         input{
-            width:100% !important;
-            margin-bottom:10px !important;
+            width:600px !important;
+            margin-bottom:20px !important;
             font-family:$font !important;
             text-align:center!important;
-            max-width:500px !important;
-            margin:5px!important;
             text-align:center!important;
             padding:10px !important;
             border-bottom:solid $secondary 3px !important;
@@ -118,7 +120,7 @@ body {
     .mainPanel{
         align-self:flex-start;
         position:relative;
-        width:45%;
+        width:800px;
         height:100%;
         // Navigation
         .Navigation{
@@ -280,6 +282,7 @@ body {
     .masterList{
         align-self:flex-start;
         position:relative;
+        width:100%;
         height:100%;
         .list{
             width:100%;
@@ -484,6 +487,8 @@ body {
             button{
                 background-color:white;
                 border:$primary solid 2px;
+                padding:10px;
+                font-size:16px;
                 color:$primary;
                 font-weight:700;
                 font-family:$font;
@@ -494,6 +499,10 @@ body {
                 &.active{
                     background-color:$secondary!important;
                     color:white!important;
+                }
+                &:disabled{
+                    opacity:0.4;
+                    pointer-events:none;
                 }
             }
         }

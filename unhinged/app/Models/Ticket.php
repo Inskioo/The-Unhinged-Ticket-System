@@ -44,25 +44,25 @@ class Ticket extends Model{
         return $query->where('type', $type);
     }
 
-    public function scopebySupportAssigned($query, $assignedTo = null){
-        if ($assignedTo === null) {
-            return $query->whereNotNull('assigned_to');
-        }
-        return $query->where('assigned_to', $assignedTo);
+    public function scopebySupportAssigned($query, $assignedTo = null){ 
+        if ($assignedTo === null) { 
+            return $query->whereNotNull('assigned_to'); 
+        } 
+            return $query->where('assigned_to', $assignedTo);
     }
 
     public function scopebyUnhingedHuman($query, $userId){
         return $query->where('user_id', $userId);
     }
 
-    public function scopebyResolved($query){
-        return $query->whereNotNull('resolved_at');
+    public function scopeByResolved($query){
+        return $query->where('status', 'resolved');
     }
-
-    public function scopebyNotResolved($query){
-        return $query->whereNull('resolved_at');
+    
+    public function scopeByNotResolved($query) {
+        return $query->where('status', '!=', 'resolved');
     }
-
+    
     public function user(){
         return $this->belongsTo(User::class, 'user_id');
     }

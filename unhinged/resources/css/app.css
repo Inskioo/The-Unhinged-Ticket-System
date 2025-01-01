@@ -16,6 +16,7 @@ body .container {
 body .container .wrapper {
   width: 100%;
   max-width: 1600px;
+  margin: 0 20px 0 20;
 }
 
 .login {
@@ -54,14 +55,15 @@ body .container .wrapper {
 }
 .login .loginForm {
   text-align: center;
+  display: Flex;
+  flex-direction: column;
+  align-items: center;
 }
 .login .loginForm input {
-  width: 100% !important;
-  margin-bottom: 10px !important;
+  width: 600px !important;
+  margin-bottom: 20px !important;
   font-family: "Montserrat", sans-serif !important;
   text-align: center !important;
-  max-width: 500px !important;
-  margin: 5px !important;
   text-align: center !important;
   padding: 10px !important;
   border-bottom: solid #EA5B0C 3px !important;
@@ -104,7 +106,7 @@ body .container .wrapper {
 .dashboard .mainPanel {
   align-self: flex-start;
   position: relative;
-  width: 45%;
+  width: 800px;
   height: 100%;
 }
 .dashboard .mainPanel .Navigation {
@@ -270,6 +272,7 @@ body .container .wrapper {
 .dashboard .masterList {
   align-self: flex-start;
   position: relative;
+  width: 100%;
   height: 100%;
 }
 .dashboard .masterList .list {
@@ -475,6 +478,8 @@ body .container .wrapper {
 .dashboard .detail .actions button {
   background-color: white;
   border: #15293C solid 2px;
+  padding: 10px;
+  font-size: 16px;
   color: #15293C;
   font-weight: 700;
   font-family: "Montserrat", sans-serif;
@@ -486,4 +491,8 @@ body .container .wrapper {
 .dashboard .detail .actions button.active {
   background-color: #EA5B0C !important;
   color: white !important;
+}
+.dashboard .detail .actions button:disabled {
+  opacity: 0.4;
+  pointer-events: none;
 }/*# sourceMappingURL=app.css.map */

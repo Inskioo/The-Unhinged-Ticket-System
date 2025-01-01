@@ -8,34 +8,46 @@ use Illuminate\Http\Request;
 
 class TicketController extends Controller{
 
-    public function index(Request $request)
-    {
-        $query = Ticket::with(['user', 'assignedTo']);
-    
-        if ($request->status === 'resolved') {
+    public function index(Request $request){
+    $query = Ticket::with(['user', 'assignedTo']);
+
+    if ($request->status) {
+        $status = $request->status;
+        if ($status === 'resolved') {
             $query->byResolved();
         } else {
             $query->byNotResolved();
         }
-    
-        $query->when($request->type, function($query) use ($request) {
-                $query->byType($request->type);
-            })
-            ->when($request->priority, function($query) use ($request) {
-                $query->byPriority($request->priority);
-            })
-            ->when($request->assigned_to, function($query) use ($request) {
-                $query->bySupportAssigned($request->assigned_to);
-            })
-            ->when($request->search, function($query) use ($request) {
-                $query->whereHas('user', function($q) use ($request) {
-                    $q->where('name', 'like', '%' . $request->search . '%')
-                      ->orWhere('email', 'like', '%' . $request->search . '%');
-                });
-            });
-    
-        return $query->orderBy('created_at', 'desc')->paginate(10);
     }
+
+    if ($request->has('assignment')) {
+        $isAssigned = filter_var($request->assignment, FILTER_VALIDATE_BOOLEAN);
+        if ($isAssigned) {
+            $query->whereNotNull('assigned_to');
+        } else {
+            $query->whereNull('assigned_to');
+        }
+    }
+
+    $query->when($request->type, function($query) use ($request) {
+            $query->byType($request->type);
+        })
+        ->when($request->priority, function($query) use ($request) {
+            $query->byPriority($request->priority);
+        })
+        ->when($request->assigned_to, function($query) use ($request) {
+            $query->bySupportAssigned($request->assigned_to);
+        })
+        ->when($request->search, function($query) use ($request) {
+            $query->whereHas('user', function($q) use ($request) {
+                $q->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+            });
+        });
+    
+    return $query->orderBy('created_at', 'desc')->paginate(10);
+}
+
 
     public function display(Ticket $ticket)
     {
