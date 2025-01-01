@@ -41,22 +41,25 @@ composer install
 obviousEcho "Setting up Sail"
 composer require laravel/sail --dev
 
-obviousEcho "Running Composer Things."
-./vendor/bin/sail composer install
-
 obviousEcho "Containers, containers, where art thou (booting, they're booting.)"
 ./vendor/bin/sail up -d
 
-obviousEcho "Giving the whales a moment to get unhinged..."
-echo -e "${YELLOW}Please wait while the containers settle...${NC}"
-progressBar 10
+obviousEcho "Running Composer Things."
+./vendor/bin/sail composer install
 
 if [ ! -f .env ]; then
     obviousEcho "No .env detected! Creating one for you..."
     cp .env.example .env
     echo -e "${GREEN}✓ .env file created${NC}"
-    php artisan key:generate
+    ./vendor/bin/sail artisan key:generate
 fi
+
+obviousEcho "Installing packages"
+npm install
+
+obviousEcho "Giving the whales a moment to get unhinged..."
+echo -e "${YELLOW}Please wait while the containers settle...${NC}"
+progressBar 10
 
 obviousEcho "Checking if MySQL is ready..."
 while ! ./vendor/bin/sail exec mysql mysqladmin ping -h"localhost" -u"sail" -p"password" --silent; do
@@ -74,8 +77,6 @@ obviousEcho "Testing our ticket functionality:"
 ./vendor/bin/sail artisan config:clear
 ./vendor/bin/sail artisan test
 
-obviousEcho "Installing packages"
-npm install
 obviousEcho "putting the front end together, nearly there."
 npm run build
 
